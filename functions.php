@@ -318,10 +318,6 @@ function async_google_analytics() { ?>
  * CUSTOM POST TYPES
  *
  */
- 	// Default Custom post type support
- 	
- 	$cpt_support =  array( 'title', 'editor', 'thumbnail');
-
  
 	// Array of labels and args for cpts
 	
@@ -334,42 +330,42 @@ function async_google_analytics() { ?>
 			'label' => 'P4P People',
 			'sing' => 'P4P Person' ,
 			'menu_pos' => 20,
-			'excerpt' => $cpt_support
+			'supports' => array( 'title', 'editor', 'thumbnail')
 		),
 		'isg_profile' => array(
 			'name' => 'isg_profile',
 			'label' => 'ISG People',
 			'sing' => 'ISG Person',
 			'menu_pos' => 21,
-			'supports' => $cpt_support
+			'supports' => array( 'title', 'editor', 'thumbnail')
 		),
 		'fgi_profile' => array(
 			'name' => 'fgi_profile',
 			'label' => 'FGI People',
 			'sing' => 'FGI Person',
 			'menu_pos' => 22,
-			'supports' => $cpt_support
+			'supports' => array( 'title', 'editor', 'thumbnail')
 		),
 		'sp_people_profile' => array(
 			'name' => 'sp_people_profile',
 			'label' => 'People',
 			'sing' => 'Person',
 			'menu_pos' => 23,
-			'supports' => $cpt_support
+			'supports' => array( 'title', 'editor', 'thumbnail')
 		),
 		'sp_company_profile' => array(
 			'name' => 'sp_company_profile',
 			'label' => 'Companies',
 			'sing' => 'Company',
 			'menu_pos' => 24,
-			'supports' => $cpt_support
+			'supports' => array( 'title', 'editor', 'thumbnail')
 		),
 		'retailer_profile' => array(
 			'name' => 'retailer_profile',
 			'label' => 'Retailers',
 			'sing' => 'Retailer',
 			'menu_pos' => 25,
-			'supports' => $cpt_support
+			'supports' => array( 'title', 'editor', 'thumbnail')
 		),
 		
 		// Timeline Items
@@ -382,7 +378,7 @@ function async_google_analytics() { ?>
 			'supports' => array('title', 'editor', 'thumbnail', 'excerpt')
 		),
 		
-       //Home Page Promos
+       //Home Page Promos & Carousel
        
        'hp_promos' => array(
 			'name' => 'hp_promos',
@@ -390,6 +386,14 @@ function async_google_analytics() { ?>
 			'sing' => 'Home Promo',
 			'menu_pos' => 3,
 			'supports' => array('title', 'editor', 'thumbnail', 'revisions')
+		),
+		
+		'hp_carousel' => array(
+			'name' => 'hp_carousel',
+			'label' => 'Home Carousel',
+			'sing' => 'Home Carousel Item',
+			'menu_pos' => 3,
+			'supports' => array('title', 'thumbnail')
 		),
 		
 		//Press releases
@@ -400,7 +404,34 @@ function async_google_analytics() { ?>
 			'sing' => 'Press Release',
 			'menu_pos' => 3,
 			'supports' => array('title')
+		),
+		
+		// P4PF, ISG, FGI Page Sections
+		
+		'pforp_secs' => array(
+			'name' => 'pforp_secs',
+			'label' => 'P4P Sections',
+			'sing' => 'P4P Section',
+			'menu_pos' => 3,
+			'supports' => array( 'title', 'editor', 'thumbnail')
+		),
+		
+		'isg_secs' => array(
+			'name' => 'isg_secs',
+			'label' => 'ISG Sections',
+			'sing' => 'ISG Section',
+			'menu_pos' => 3,
+			'supports' => array( 'title', 'editor', 'thumbnail')
+		),
+		
+		'fgi_secs' => array(
+			'name' => 'fgi_secs',
+			'label' => 'FGI Sections',
+			'sing' => 'FGI Section',
+			'menu_pos' => 3,
+			'supports' => array( 'title', 'editor', 'thumbnail')
 		)
+		
 	);
 	foreach($cpts_args as $cpt){
 		$labels = array(
@@ -446,11 +477,30 @@ function metabox_style() {
 	wp_enqueue_style('wpalchemy-metabox', get_stylesheet_directory_uri() . '/metaboxes/meta.css');
 }
 
-$custom_metabox = $simple_mb = new WPAlchemy_MetaBox(array
+// Meta box for people profile on P4PF, ISG, FGI
+
+$people_mb = new WPAlchemy_MetaBox(array
 (
-	'id' => '_custom_meta',
+	'id' => '_people_meta',
 	'title' => 'Role And Email',
+	'types' => array('p4p_profile' , 'isg_profile' , 'fgi_profile'),
 	'template' => get_stylesheet_directory() . '/metaboxes/people-meta.php',
+));
+
+$link_mb = new WPAlchemy_MetaBox(array
+(
+	'id' => '_link_meta',
+	'title' => 'Link to Retailer/Company',
+	'types' => array('sp_company_profile' , 'sp_people_profile' , 'retailer_profile'),
+	'template' => get_stylesheet_directory() . '/metaboxes/link-meta.php',
+));
+
+$carousel_meta = new WPAlchemy_MetaBox(array
+(
+	'id' => '_carousel_meta',
+	'title' => 'Link to Retailer/Company',
+	'types' => array('sp_company_profile' , 'sp_people_profile' , 'retailer_profile'),
+	'template' => get_stylesheet_directory() . '/metaboxes/link-meta.php',
 ));
 
 
