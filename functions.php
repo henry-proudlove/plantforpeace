@@ -216,51 +216,242 @@ function async_google_analytics() { ?>
 		})(document, 'script');
 	</script>
 <?php }*/ ?>
-<?php /*
- * A default custom post type. DELETE from here to the end if you don't want any custom post types
- */
-/*add_action('init', 'create_boilertemplate_cpt');
-function create_boilertemplate_cpt() 
-{
-  $labels = array(
-    'name' => _x('HandcraftedWPTemplate CPT', 'post type general name'),
-    'singular_name' => _x('HandcraftedWPTemplate CPT Item', 'post type singular name'),
-    'add_new' => _x('Add New', 'handcraftedwptemplate_robot'),
-    'add_new_item' => __('Add New Item'),
-    'edit_item' => __('Edit Item'),
-    'new_item' => __('New Item'),
-    'view_item' => __('View Item'),
-    'search_items' => __('Search Items'),
-    'not_found' =>  __('No items found'),
-    'not_found_in_trash' => __('No items found in Trash'), 
-    'parent_item_colon' => ''
-  );
-  $args = array(
-    'labels' => $labels,
-    'public' => true,
-    'show_ui' => true, 
-    'query_var' => true,
-    'rewrite' => true,
-    'capability_type' => 'page',
-    'hierarchical' => false,
-    'menu_position' => 20,
-    'supports' => array('title','editor')
-  ); 
-  register_post_type('handcraftedwptemplate_robot',$args);
-}*/
+<?php
+
 /*
- * This is for a custom icon with a colored hover state for your custom post types. You can download the custom icons here 
- http://randyjensenonline.com/thoughts/wordpress-custom-post-type-fugue-icons/
+ *
+ * CREATE PAGES ON THEME ACTIVATION
+ *
  */
-/*add_action( 'admin_head', 'cpt_icons' );
-function cpt_icons() {
-    ?>
-    <style type="text/css" media="screen">
-        #menu-posts-handcraftedwptemplaterobot .wp-menu-image {
-            background: url(<?php bloginfo('template_url') ?>/images/robot.png) no-repeat 6px -17px !important;
-        }
-		#menu-posts-handcraftedwptemplaterobot:hover .wp-menu-image, #menu-posts-handcraftedwptemplaterobot.wp-has-current-submenu .wp-menu-image {
-            background-position:6px 7px!important;
-        }
-    </style>
-<?php }*/ ?>
+ 
+ if (isset($_GET['activated']) && is_admin()){
+	
+	$pforp_pages = array(
+				array(
+					'page_title' => 'Home',
+					'page_template' => 'page-home.php',
+					'menu_order' => 0
+				),
+				array(
+					'page_title' => 'What We Do',
+					'page_template' => 'page.php',
+					'menu_order' => 1
+				),
+				array(
+					'page_title' => 'How we Work',
+					'page_template' => 'page.php',
+					'menu_order' => 2
+				),
+				array(
+					'page_title' => 'Plant For Peace Foundation',
+					'page_template' => 'page-body.php',
+					'menu_order' => 3
+				),
+				array(
+					'page_title' => 'International Steering Group',
+					'page_template' => 'page-body.php',
+					'menu_order' => 4
+				),
+				array(
+					'page_title' => 'Funktional Group',
+					'page_template' => 'page-body.php',
+					'menu_order' => 5
+				),
+				array(
+					'page_title' => 'Where we Work',
+					'page_template' => 'page.php',
+					'menu_order' => 6				
+				),
+				array(
+					'page_title' => 'Supporters',
+					'page_template' => 'page.php',
+					'menu_order' => 7
+				),
+				array(
+					'page_title' => 'Media',
+					'page_template' => 'page-news.php',
+					'menu_order' => 8
+				),
+				array(
+					'page_title' => 'Products',
+					'page_template' => 'page.php',
+					'menu_order' => 8
+				),
+				array(
+					'page_title' => 'Get Involved',
+					'page_template' => 'page.php',
+					'menu_order' => 10
+				)
+		);
+	$page_count = count($pforp_pages);
+	
+	foreach($pforp_pages as $page)
+	{
+		$new_page = array(
+			'post_type' => 'page',
+			'post_title' => $page['page_title'],
+			'post_content' => '',
+			'post_status' => 'publish',
+			'post_author' => 1,
+			'menu_order' => $page['menu_order']
+		);
+		
+		$new_page_id = wp_insert_post($new_page);
+		update_post_meta($new_page_id, '_wp_page_template', $page['page_template']);
+		
+		
+		if($page['page_template'] == 'page-home.php')
+		{
+			update_option( 'page_on_front', $new_page_id );
+			update_option( 'show_on_front', 'page' );
+		}
+		
+		if($page['page_template'] == 'page-news.php')
+		{
+			update_option( 'page_for_posts', $new_page_id );
+		}
+	}
+}
+
+/*
+ *
+ * CUSTOM POST TYPES
+ *
+ */
+ 	// Default Custom post type support
+ 	
+ 	$cpt_support =  array( 'title', 'editor', 'thumbnail');
+
+ 
+	// Array of labels and args for cpts
+	
+	$cpts_args	= array(
+		
+		// People Profiles
+		
+		'p4pf_profile' => array(
+			'name' => 'p4p_profile',
+			'label' => 'P4P People',
+			'sing' => 'P4P Person' ,
+			'menu_pos' => 20,
+			'excerpt' => $cpt_support
+		),
+		'isg_profile' => array(
+			'name' => 'isg_profile',
+			'label' => 'ISG People',
+			'sing' => 'ISG Person',
+			'menu_pos' => 21,
+			'supports' => $cpt_support
+		),
+		'fgi_profile' => array(
+			'name' => 'fgi_profile',
+			'label' => 'FGI People',
+			'sing' => 'FGI Person',
+			'menu_pos' => 22,
+			'supports' => $cpt_support
+		),
+		'sp_people_profile' => array(
+			'name' => 'sp_people_profile',
+			'label' => 'People',
+			'sing' => 'Person',
+			'menu_pos' => 23,
+			'supports' => $cpt_support
+		),
+		'sp_company_profile' => array(
+			'name' => 'sp_company_profile',
+			'label' => 'Companies',
+			'sing' => 'Company',
+			'menu_pos' => 24,
+			'supports' => $cpt_support
+		),
+		'retailer_profile' => array(
+			'name' => 'retailer_profile',
+			'label' => 'Retailers',
+			'sing' => 'Retailer',
+			'menu_pos' => 25,
+			'supports' => $cpt_support
+		),
+		
+		// Timeline Items
+		
+		'timeline' => array(
+			'name' => 'timeline',
+			'label' => 'Timeline items',
+			'sing' => 'Timeline Item',
+			'menu_pos' => 26,
+			'supports' => array('title', 'editor', 'thumbnail', 'excerpt')
+		),
+		
+       //Home Page Promos
+       
+       'hp_promos' => array(
+			'name' => 'hp_promos',
+			'label' => 'Home Promos',
+			'sing' => 'Home Promo',
+			'menu_pos' => 3,
+			'supports' => array('title', 'editor', 'thumbnail', 'revisions')
+		),
+		
+		//Press releases
+       
+       'press_rels' => array(
+			'name' => 'press_rels',
+			'label' => 'Press Releases',
+			'sing' => 'Press Release',
+			'menu_pos' => 3,
+			'supports' => array('title')
+		)
+	);
+	foreach($cpts_args as $cpt){
+		$labels = array(
+			'name' => _x($cpt['label'], 'post type general name'),
+			'singular_name' => _x($cpt['sing'], 'post type singular name'),
+			'add_new' => _x('Add New', 'handcraftedwptemplate_robot'),
+			'add_new_item' => __('Add New Item'),
+			'edit_item' => __('Edit Item'),
+			'new_item' => __('New Item'),
+			'view_item' => __('View Item'),
+			'search_items' => __('Search Items'),
+			'not_found' =>  __('No items found'),
+			'not_found_in_trash' => __('No items found in Trash'), 
+			'parent_item_colon' => ''
+		);
+		$args = array(
+			'labels' => $labels,
+			'public' => true,
+			'show_ui' => true, 
+			'query_var' => true,
+			'rewrite' => true,
+			'capability_type' => 'post',
+			'hierarchical' => false,
+			'menu_position' => $cpt['menu_pos'],
+			'supports' => $cpt['supports']
+		);
+		register_post_type($cpt['name'], $args);
+	}
+
+
+/*
+ *
+ * META BOXES
+ *
+ */
+ 
+include_once WP_CONTENT_DIR . '/wpalchemy/MetaBox.php';
+
+// global styles for the meta boxes
+if (is_admin()) add_action('admin_enqueue_scripts', 'metabox_style');
+
+function metabox_style() {
+	wp_enqueue_style('wpalchemy-metabox', get_stylesheet_directory_uri() . '/metaboxes/meta.css');
+}
+
+$custom_metabox = $simple_mb = new WPAlchemy_MetaBox(array
+(
+	'id' => '_custom_meta',
+	'title' => 'Role And Email',
+	'template' => get_stylesheet_directory() . '/metaboxes/people-meta.php',
+));
+
+
+?>
