@@ -2,7 +2,7 @@
 { display:none; }
  
 .my_meta_control label
-{ display:block; font-weight:bold; margin:6px; margin-bottom:0; margin-top:12px; }
+{ display:block; font-weight:bold; margin: 6px 3px; margin-bottom:0; margin-top:12px; }
  
 .my_meta_control label span
 { display:inline; font-weight:normal; }

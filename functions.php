@@ -490,17 +490,25 @@ $people_mb = new WPAlchemy_MetaBox(array
 $link_mb = new WPAlchemy_MetaBox(array
 (
 	'id' => '_link_meta',
-	'title' => 'Link to Retailer/Company',
-	'types' => array('sp_company_profile' , 'sp_people_profile' , 'retailer_profile'),
+	'title' => 'Link',
+	'types' => array('sp_company_profile' , 'sp_people_profile' , 'retailer_profile', 'press_rels', 'hp_promos'),
 	'template' => get_stylesheet_directory() . '/metaboxes/link-meta.php',
 ));
 
 $carousel_meta = new WPAlchemy_MetaBox(array
 (
 	'id' => '_carousel_meta',
-	'title' => 'Link to Retailer/Company',
-	'types' => array('sp_company_profile' , 'sp_people_profile' , 'retailer_profile'),
-	'template' => get_stylesheet_directory() . '/metaboxes/link-meta.php',
+	'title' => 'Carousel Item Clickthourgh',
+	'types' => array('hp_carousel'),
+	'template' => get_stylesheet_directory() . '/metaboxes/carousel-meta.php',
+));
+
+$timeline_meta = new WPAlchemy_MetaBox(array
+(
+	'id' => '_timeline_meta',
+	'title' => 'Video/Image',
+	'types' => array('timeline'),
+	'template' => get_stylesheet_directory() . '/metaboxes/timeline-meta.php',
 ));
 
 
