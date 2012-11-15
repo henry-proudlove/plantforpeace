@@ -585,29 +585,24 @@ update_option('thumbnail_crop', 1);
  *
  */
  
-function header_images( ) {
-	 	
+function img_fecther($size='header', $limit=-1) {
+
 	global $post;
-	
-	
-	$images = get_children( array(
+
+	if ($images = get_children(array(
+
 		'post_parent' => $post->ID,
-		'post_status' => 'inherit',
 		'post_type' => 'attachment',
-		'post_mime_type' => 'image',
-		'order' => 'ASC',
-		'orderby' => 'menu_order ID'
-	));
-	
-	//Adding parent title as class
-	
-	if ($images) {
+		'order' => 'DESC',
+		'numberposts' => $limit,
+		'post_mime_type' => 'image')))
 
-		print_r($images);
+		foreach($images as $image) {
 
-	}else{
-		return false;
-	}
+			$attachment=wp_get_attachment_image_src($image->ID, $size); ?><div class="images">
+			<img src="<?php echo $attachment[0]; ?>" width="<?php echo $attachment[1]; ?>" height="<?php echo $attachment[2]; ?>" /></div><!--.images--><?php
+
+		}
 }
 
 /*
@@ -674,10 +669,14 @@ function pg_header(){
 	?>
 	
 	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> role="article">
-		<?php 
-		
-		 //if(has_post_thumbnail()){the_post_thumbnail('header');} ?>
-			
+		<?php
+		if ( is_page_template('page-whatwedo.php') ) { ?>
+			<a href="#" rel=bookmark>
+				<?php img_fecther('header' , 1);?>
+			</a>
+		<?php } else {
+			img_fecther();
+		} ?>
 		<div class="intro">
 			<h1 class="entry-title"><?php the_title(); ?></h1>
 			<div class="entry-content">
