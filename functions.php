@@ -556,4 +556,29 @@ $timeline_meta = new WPAlchemy_MetaBox(array
 ));
 
 
+
+/*
+ *
+ * IMAGE SIZES
+ *
+ */
+
+add_image_size( 'carousel', 960, 440, true );
+add_image_size( 'header', 960, 360, true );
+add_image_size( 'promo', 320, 210, true );
+add_image_size( 'profile', 193, 193, true );
+add_image_size( 'overlay', 640, 430, true );
+add_image_size( 'news_lead', 590, 300, true );
+add_image_size( 'news_body', 295, 295, true );
+add_image_size( 'timeline', 430, 200, true );
+
+
+update_option('medium_size_w', 750);
+update_option('medium_size_w', 490);
+
+update_option('thumbnail_size_w', 80);
+update_option('thumbnail_size_h', 80);
+update_option('thumbnail_crop', 1);
+
+
 ?>
