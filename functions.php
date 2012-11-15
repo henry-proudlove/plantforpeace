@@ -331,7 +331,6 @@ function async_google_analytics() { ?>
 			'sing' => 'P4P Person' ,
 			'edit' => 'Person',
 			'edits' => 'People',
-			'menu_pos' => 20,
 			'supports' => array( 'title', 'editor', 'thumbnail')
 		),
 		'isg_profile' => array(
@@ -340,7 +339,6 @@ function async_google_analytics() { ?>
 			'sing' => 'ISG Person',
 			'edit' => 'Person',
 			'edits' => 'People',
-			'menu_pos' => 21,
 			'supports' => array( 'title', 'editor', 'thumbnail')
 		),
 		'fgi_profile' => array(
@@ -349,7 +347,6 @@ function async_google_analytics() { ?>
 			'sing' => 'FGI Person',
 			'edit' => 'Person',
 			'edits' => 'People',
-			'menu_pos' => 22,
 			'supports' => array( 'title', 'editor', 'thumbnail')
 		),
 		'sp_people_profile' => array(
@@ -358,7 +355,6 @@ function async_google_analytics() { ?>
 			'sing' => 'Person',
 			'edit' => 'Person',
 			'edits' => 'People',
-			'menu_pos' => 23,
 			'supports' => array( 'title', 'editor', 'thumbnail')
 		),
 		'sp_company_profile' => array(
@@ -367,7 +363,6 @@ function async_google_analytics() { ?>
 			'sing' => 'Company',
 			'edit' => 'Comapany',
 			'edits' => 'Companies',
-			'menu_pos' => 24,
 			'supports' => array( 'title', 'editor', 'thumbnail')
 		),
 		'retailer_profile' => array(
@@ -376,7 +371,6 @@ function async_google_analytics() { ?>
 			'sing' => 'Retailer',
 			'edit' => 'Retailer',
 			'edits' => 'Retailers',
-			'menu_pos' => 25,
 			'supports' => array( 'title', 'editor', 'thumbnail')
 		),
 		
@@ -388,7 +382,6 @@ function async_google_analytics() { ?>
 			'sing' => 'Timeline Item',
 			'edit' => 'Item',
 			'edits' => 'Items',
-			'menu_pos' => 26,
 			'supports' => array('title', 'editor', 'thumbnail', 'excerpt')
 		),
 		
@@ -400,7 +393,6 @@ function async_google_analytics() { ?>
 			'sing' => 'Home Promo',
 			'edit' => 'Promo',
 			'edits' => 'Promo',
-			'menu_pos' => 3,
 			'supports' => array('title', 'editor', 'thumbnail', 'revisions')
 		),
 		
@@ -410,7 +402,6 @@ function async_google_analytics() { ?>
 			'sing' => 'Home Carousel Item',
 			'edit' => 'Item',
 			'edits' => 'Items',
-			'menu_pos' => 3,
 			'supports' => array('title', 'thumbnail')
 		),
 		
@@ -422,7 +413,6 @@ function async_google_analytics() { ?>
 			'sing' => 'Press Release',
 			'edit' => 'Press Release',
 			'edits' => 'Press Releases',
-			'menu_pos' => 3,
 			'supports' => array('title')
 		),
 		
@@ -434,7 +424,6 @@ function async_google_analytics() { ?>
 			'sing' => 'P4P Section',
 			'edit' => 'Section',
 			'edits' => 'Sections',
-			'menu_pos' => 3,
 			'supports' => array( 'title', 'editor', 'thumbnail')
 		),
 		
@@ -442,7 +431,8 @@ function async_google_analytics() { ?>
 			'name' => 'isg_secs',
 			'label' => 'ISG Sections',
 			'sing' => 'ISG Section',
-			'menu_pos' => 3,
+			'edit' => 'Section',
+			'edits' => 'Sections',
 			'supports' => array( 'title', 'editor', 'thumbnail')
 		),
 		
@@ -452,7 +442,6 @@ function async_google_analytics() { ?>
 			'sing' => 'FGI Section',
 			'edit' => 'Section',
 			'edits' => 'Sections',
-			'menu_pos' => 3,
 			'supports' => array( 'title', 'editor', 'thumbnail')
 		),
 		
@@ -462,7 +451,17 @@ function async_google_analytics() { ?>
 			'sing' => 'Afganistan Section',
 			'edit' => 'Section',
 			'edits' => 'Sections',
-			'menu_pos' => 3,
+			'supports' => array( 'title', 'editor', 'thumbnail')
+		),
+		
+		// How we work promos
+		
+		'howwework_promo' => array(
+			'name' => 'howwework_promo',
+			'label' => 'How we work Promos',
+			'sing' => 'How we work Promo',
+			'edit' => 'Promo',
+			'edits' => 'Promos',
 			'supports' => array( 'title', 'editor', 'thumbnail')
 		)
 		
@@ -499,7 +498,6 @@ function async_google_analytics() { ?>
 			'rewrite' => true,
 			'capability_type' => 'post',
 			'hierarchical' => false,
-			//'menu_position' => $cpt['menu_pos'],
 			'supports' => $cpt['supports']
 		);
 		register_post_type($cpt['name'], $args);
@@ -535,7 +533,7 @@ $link_mb = new WPAlchemy_MetaBox(array
 (
 	'id' => '_link_meta',
 	'title' => 'Link',
-	'types' => array('sp_company_profile' , 'sp_people_profile' , 'retailer_profile', 'press_rels', 'hp_promos'),
+	'types' => array('sp_company_profile' , 'sp_people_profile' , 'retailer_profile', 'press_rels', 'hp_promos', 'howwework_promo'),
 	'template' => get_stylesheet_directory() . '/metaboxes/link-meta.php',
 ));
 
@@ -581,4 +579,113 @@ update_option('thumbnail_size_h', 80);
 update_option('thumbnail_crop', 1);
 
 
+/*
+ *
+ * HEADER IMAGE FETCHER
+ *
+ */
+ 
+function header_images( ) {
+	 	
+	global $post;
+	
+	
+	$images = get_children( array(
+		'post_parent' => $post->ID,
+		'post_status' => 'inherit',
+		'post_type' => 'attachment',
+		'post_mime_type' => 'image',
+		'order' => 'ASC',
+		'orderby' => 'menu_order ID'
+	));
+	
+	//Adding parent title as class
+	
+	if ($images) {
+
+		print_r($images);
+
+	}else{
+		return false;
+	}
+}
+
+/*
+ *
+ * META DATA HANDLERS
+ *
+ */
+ 
+
+function carousel_meta(){
+	global $carousel_meta;
+	$meta = $carousel_meta->the_meta();
+	
+	if($meta['page-video'] == 'video'){
+		$meta['page-video'] = 'colorBox';
+	}else{
+		$meta['page-video'] = '';
+	}
+	return $meta;
+}
+
+function the_clickthrough($text = 'Find out more'){
+	global $post;
+	$meta = get_post_meta($post->ID, '_link_meta', true);
+	print_r($meta);
+	echo '<span> class="arrow-link"';
+	echo $meta['link_txt'];
+	echo '</span>';
+}
+
+function threecol_promos($type){ ?>
+	
+	<section id="promos" class="threecol">
+		<?php
+			$args = array('post_type' => $type , 'posts_per_page' => '3');
+			$wp_query = new WP_Query($args);
+			
+			while ( $wp_query->have_posts() ) : $wp_query->the_post();
+				if(has_post_thumbnail()):
+				
+				//get the clickthrough link
+				$meta = get_post_meta($post->ID, '_link_meta', true);
+				
+				?>
+					<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> role="article">
+						<a href="<?php echo $meta['link_url'] ?>" rel="bookmark">
+							<h3><? the_title(); ?></h3>
+							<?php the_post_thumbnail('promo'); ?>
+							<?php the_excerpt(); ?>
+							<?php the_clickthrough($meta['link_txt']); ?>
+						</a>
+						
+					</article>
+				<?php endif; ?>
+			<?php endwhile; ?>
+	</section><!--#promos-->
+
+<?php }
+
+function pg_header(){ 
+	
+	global $post;
+
+	?>
+	
+	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> role="article">
+		<?php 
+		
+		 //if(has_post_thumbnail()){the_post_thumbnail('header');} ?>
+			
+		<div class="intro">
+			<h1 class="entry-title"><?php the_title(); ?></h1>
+			<div class="entry-content">
+				<?php the_content(); ?>
+			</div><!-- .entry-content -->
+		</div><!-- .intro -->
+		
+	</article><!-- #post-<?php the_ID(); ?> -->
+	
+<?php }
 ?>

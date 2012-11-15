@@ -2,7 +2,7 @@
 
 <?php
 
-$mb->the_field('present-past');
+$mb->the_field('page-video');
 
 if(is_null($mb->get_the_value()))
 
@@ -17,7 +17,7 @@ if(is_null($mb->get_the_value()))
 </p>
 <p>
 	<label>Clickthrough URL </label>
-	<input type="text" name="<?php $metabox->the_name('booking-email'); ?>" value="<?php $metabox->the_value('booking-email'); ?>"/>
+	<input type="text" name="<?php $metabox->the_name('ct_link'); ?>" value="<?php $metabox->the_value('ct_link'); ?>"/>
 	<span>Must be full URL (e.g. http://example.com/example). Video links from vimeo only.
 </p>
 </div>

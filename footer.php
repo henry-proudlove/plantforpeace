@@ -9,8 +9,8 @@
 
 	<footer id="colophon" role="contentinfo">
 			<div id="site-generator">
-				<small>&copy Copyright <?php echo date('Y') . " " . esc_attr( get_bloginfo( 'name', 'display' ) ); ?> <a href="http://wordpress.org/" title="<?php esc_attr_e( 'A Semantic Personal Publishing Platform', 'themename' ); ?>" rel="generator"><?php printf( __( 'Proudly powered by %s.', 'themename' ), 'WordPress' ); ?></a></small>
-				<?php wp_nav_menu( array( 'theme_location' => 'footer' ) ); ?>
+				<small><a href="mailto:info@plantforpeace.org">info@plantforpeace.org</a></small>
+				<small>© 2012 Plant for Peace Foundation Registered Chairty 202918</small>
 			</div>
 	</footer><!-- #colophon -->
 </div><!-- #page -->
