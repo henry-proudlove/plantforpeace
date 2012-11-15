@@ -329,6 +329,8 @@ function async_google_analytics() { ?>
 			'name' => 'p4p_profile',
 			'label' => 'P4P People',
 			'sing' => 'P4P Person' ,
+			'edit' => 'Person',
+			'edits' => 'People',
 			'menu_pos' => 20,
 			'supports' => array( 'title', 'editor', 'thumbnail')
 		),
@@ -336,6 +338,8 @@ function async_google_analytics() { ?>
 			'name' => 'isg_profile',
 			'label' => 'ISG People',
 			'sing' => 'ISG Person',
+			'edit' => 'Person',
+			'edits' => 'People',
 			'menu_pos' => 21,
 			'supports' => array( 'title', 'editor', 'thumbnail')
 		),
@@ -343,6 +347,8 @@ function async_google_analytics() { ?>
 			'name' => 'fgi_profile',
 			'label' => 'FGI People',
 			'sing' => 'FGI Person',
+			'edit' => 'Person',
+			'edits' => 'People',
 			'menu_pos' => 22,
 			'supports' => array( 'title', 'editor', 'thumbnail')
 		),
@@ -350,6 +356,8 @@ function async_google_analytics() { ?>
 			'name' => 'sp_people_profile',
 			'label' => 'People',
 			'sing' => 'Person',
+			'edit' => 'Person',
+			'edits' => 'People',
 			'menu_pos' => 23,
 			'supports' => array( 'title', 'editor', 'thumbnail')
 		),
@@ -357,6 +365,8 @@ function async_google_analytics() { ?>
 			'name' => 'sp_company_profile',
 			'label' => 'Companies',
 			'sing' => 'Company',
+			'edit' => 'Comapany',
+			'edits' => 'Companies',
 			'menu_pos' => 24,
 			'supports' => array( 'title', 'editor', 'thumbnail')
 		),
@@ -364,6 +374,8 @@ function async_google_analytics() { ?>
 			'name' => 'retailer_profile',
 			'label' => 'Retailers',
 			'sing' => 'Retailer',
+			'edit' => 'Retailer',
+			'edits' => 'Retailers',
 			'menu_pos' => 25,
 			'supports' => array( 'title', 'editor', 'thumbnail')
 		),
@@ -374,6 +386,8 @@ function async_google_analytics() { ?>
 			'name' => 'timeline',
 			'label' => 'Timeline items',
 			'sing' => 'Timeline Item',
+			'edit' => 'Item',
+			'edits' => 'Items',
 			'menu_pos' => 26,
 			'supports' => array('title', 'editor', 'thumbnail', 'excerpt')
 		),
@@ -384,6 +398,8 @@ function async_google_analytics() { ?>
 			'name' => 'hp_promos',
 			'label' => 'Home Promos',
 			'sing' => 'Home Promo',
+			'edit' => 'Promo',
+			'edits' => 'Promo',
 			'menu_pos' => 3,
 			'supports' => array('title', 'editor', 'thumbnail', 'revisions')
 		),
@@ -392,6 +408,8 @@ function async_google_analytics() { ?>
 			'name' => 'hp_carousel',
 			'label' => 'Home Carousel',
 			'sing' => 'Home Carousel Item',
+			'edit' => 'Item',
+			'edits' => 'Items',
 			'menu_pos' => 3,
 			'supports' => array('title', 'thumbnail')
 		),
@@ -402,6 +420,8 @@ function async_google_analytics() { ?>
 			'name' => 'press_rels',
 			'label' => 'Press Releases',
 			'sing' => 'Press Release',
+			'edit' => 'Press Release',
+			'edits' => 'Press Releases',
 			'menu_pos' => 3,
 			'supports' => array('title')
 		),
@@ -412,6 +432,8 @@ function async_google_analytics() { ?>
 			'name' => 'pforp_secs',
 			'label' => 'P4P Sections',
 			'sing' => 'P4P Section',
+			'edit' => 'Section',
+			'edits' => 'Sections',
 			'menu_pos' => 3,
 			'supports' => array( 'title', 'editor', 'thumbnail')
 		),
@@ -428,23 +450,45 @@ function async_google_analytics() { ?>
 			'name' => 'fgi_secs',
 			'label' => 'FGI Sections',
 			'sing' => 'FGI Section',
+			'edit' => 'Section',
+			'edits' => 'Sections',
+			'menu_pos' => 3,
+			'supports' => array( 'title', 'editor', 'thumbnail')
+		),
+		
+		'wherework_secs' => array(
+			'name' => 'wherework_secs',
+			'label' => 'Afganistan Sections',
+			'sing' => 'Afganistan Section',
+			'edit' => 'Section',
+			'edits' => 'Sections',
 			'menu_pos' => 3,
 			'supports' => array( 'title', 'editor', 'thumbnail')
 		)
 		
 	);
 	foreach($cpts_args as $cpt){
+	
+		//EDIT, ADD AND SEARCH TERMS
+		$add = 'Add ' . $cpt['edit'];
+		$edit = 'Edit ' . $cpt['edit'];
+		$new = 'New ' . $cpt['edit'];
+		$view = 'View ' . $cpt['edit'];
+		$search = 'Search ' . $cpt['edits'];
+		$none = 'No ' . $cpt['edits'] . ' Found';
+		$trash = 'No ' . $cpt['edits'] . ' Found In Trash';
+		
 		$labels = array(
 			'name' => _x($cpt['label'], 'post type general name'),
 			'singular_name' => _x($cpt['sing'], 'post type singular name'),
 			'add_new' => _x('Add New', 'handcraftedwptemplate_robot'),
-			'add_new_item' => __('Add New Item'),
-			'edit_item' => __('Edit Item'),
-			'new_item' => __('New Item'),
-			'view_item' => __('View Item'),
-			'search_items' => __('Search Items'),
-			'not_found' =>  __('No items found'),
-			'not_found_in_trash' => __('No items found in Trash'), 
+			'add_new_item' => __($add),
+			'edit_item' => __($edit),
+			'new_item' => __($new),
+			'view_item' => __($view),
+			'search_items' => __($search),
+			'not_found' =>  __($none),
+			'not_found_in_trash' => __($trash), 
 			'parent_item_colon' => ''
 		);
 		$args = array(
@@ -455,7 +499,7 @@ function async_google_analytics() { ?>
 			'rewrite' => true,
 			'capability_type' => 'post',
 			'hierarchical' => false,
-			'menu_position' => $cpt['menu_pos'],
+			//'menu_position' => $cpt['menu_pos'],
 			'supports' => $cpt['supports']
 		);
 		register_post_type($cpt['name'], $args);
