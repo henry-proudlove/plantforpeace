@@ -9,6 +9,9 @@ var vimeoUsername = '3362379';
 // Get the user's videos
 $(document).ready(function() {
 	$.getScript(apiEndpoint + vimeoUsername + '/videos.json?callback=' + videosCallback);
+	$('#header-images').after('<div id="nav">').cycle({
+		pager:  '#nav'
+	});
 });
 
 function setupGallery(videos) {
@@ -35,5 +38,6 @@ function setupGallery(videos) {
     } else {
         $(this).colorbox();
     }
+    
 });
 }

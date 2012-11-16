@@ -433,3 +433,18 @@ article.comment {
 #colophon {
 	padding: 1em 0 0;
 }
+
+/*
+ *
+ * Cycle
+ *
+ */
+ 
+#header-images{
+	width: 960px;
+	height: 360px;
+}
+
+#carousel #header-images{
+	height: 440px;
+}

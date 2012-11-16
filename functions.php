@@ -682,13 +682,15 @@ function pg_header(){
 	<section id="intro">
 		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> role="article">
 			<?php
+			echo '<div id="header-images">';
 			if ( is_page_template('page-whatwedo.php') ) { ?>
 				<a href="#" rel=bookmark>
 					<?php img_fecther('header' , 1);?>
 				</a>
 			<?php } else {
 				img_fecther('header' , -1);
-			} ?>
+			}
+			echo '</div><!--#header-images-->';?>
 			<div class="intro">
 				<h1 class="entry-title"><?php the_title(); ?></h1>
 				<div class="entry-content">
