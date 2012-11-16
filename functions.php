@@ -553,6 +553,14 @@ $timeline_meta = new WPAlchemy_MetaBox(array
 	'template' => get_stylesheet_directory() . '/metaboxes/timeline-meta.php',
 ));
 
+$timeline_intro_meta = new WPAlchemy_MetaBox(array
+(
+	'id' => '_timeline_intro_meta',
+	'title' => 'Timeline Intro Copy',
+	'include_template' => array('page-whatwedo.php'),
+	'template' => get_stylesheet_directory() . '/metaboxes/timeline-intro-meta.php',
+));
+
 
 
 /*
@@ -585,24 +593,35 @@ update_option('thumbnail_crop', 1);
  *
  */
  
-function img_fecther($size='header', $limit=-1) {
+function img_fecther($size='header', $limit=1) {
 
 	global $post;
+	
+	echo '<div class="images">';
+	
+	if(has_post_thumbnail()){
+		the_post_thumbnail($size);
+		$exclude = get_post_thumbnail_id();
+	}else{
+		$exclude = '';
+	}
 
 	if ($images = get_children(array(
 
 		'post_parent' => $post->ID,
 		'post_type' => 'attachment',
 		'order' => 'DESC',
+		'exclude' => $exclude,
 		'numberposts' => $limit,
 		'post_mime_type' => 'image')))
 
 		foreach($images as $image) {
 
-			$attachment=wp_get_attachment_image_src($image->ID, $size); ?><div class="images">
-			<img src="<?php echo $attachment[0]; ?>" width="<?php echo $attachment[1]; ?>" height="<?php echo $attachment[2]; ?>" /></div><!--.images--><?php
+			$attachment=wp_get_attachment_image_src($image->ID, $size); ?>
+			<img src="<?php echo $attachment[0]; ?>" width="<?php echo $attachment[1]; ?>" height="<?php echo $attachment[2]; ?>" /><?php
 
 		}
+	echo '</div><!--.images-->';
 }
 
 /*
@@ -626,14 +645,14 @@ function carousel_meta(){
 
 function the_clickthrough($text = 'Find out more'){
 	global $post;
-	$meta = get_post_meta($post->ID, '_link_meta', true);
-	print_r($meta);
-	echo '<span> class="arrow-link"';
-	echo $meta['link_txt'];
+	echo '<span class="arrow-link">';
+	echo $text;
 	echo '</span>';
 }
 
-function threecol_promos($type){ ?>
+function threecol_promos($type){ 
+
+	global $post;?>
 	
 	<section id="promos" class="threecol">
 		<?php
@@ -644,18 +663,14 @@ function threecol_promos($type){ ?>
 				if(has_post_thumbnail()):
 				
 				//get the clickthrough link
-				$meta = get_post_meta($post->ID, '_link_meta', true);
-				
+				$meta = get_post_meta($post->ID, '_link_meta', true);				
 				?>
-					<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> role="article">
-						<a href="<?php echo $meta['link_url'] ?>" rel="bookmark">
-							<h3><? the_title(); ?></h3>
-							<?php the_post_thumbnail('promo'); ?>
-							<?php the_excerpt(); ?>
-							<?php the_clickthrough($meta['link_txt']); ?>
-						</a>
-						
-					</article>
+					<a href="<?php echo $meta['link_url'] ?>" id="post-<?php the_ID(); ?>" <?php post_class(); ?> role="article" rel="bookmark">
+						<h3><? the_title(); ?></h3>
+						<?php the_post_thumbnail('promo'); ?>
+						<?php the_excerpt(); ?>
+						<?php the_clickthrough($meta['link_txt']); ?>
+					</a>
 				<?php endif; ?>
 			<?php endwhile; ?>
 	</section><!--#promos-->
@@ -685,6 +700,27 @@ function pg_header(){
 		</div><!-- .intro -->
 		
 	</article><!-- #post-<?php the_ID(); ?> -->
+	
+<?php }
+
+
+function the_timeline_exceprt(){
+
+	global $post; ?>
+	
+	<a href="<?php the_permalink(); ?>" id="post-<?php the_ID(); ?>" <?php post_class(); ?> rel="bookmark">
+
+		<time><?php the_date('F Y');?></time>
+		<?php img_fecther('timeline'); ?>
+		<div class="intro">
+			<h1 class="entry-title"><?php the_title(); ?></h1>
+			<div class="entry-summary">
+				<?php the_excerpt(); ?>
+				<?php the_clickthrough('Read More'); ?>
+			</div><!-- .entry-summary -->
+		</div><!-- .intro -->
+		
+	</a><!-- #post-<?php the_ID(); ?> -->
 	
 <?php }
 ?>
