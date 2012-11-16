@@ -382,7 +382,7 @@ function async_google_analytics() { ?>
 			'sing' => 'Timeline Item',
 			'edit' => 'Item',
 			'edits' => 'Items',
-			'supports' => array('title', 'editor', 'thumbnail', 'excerpt')
+			'supports' => array('title', 'editor', 'thumbnail')
 		),
 		
        //Home Page Promos & Carousel
@@ -413,13 +413,13 @@ function async_google_analytics() { ?>
 			'sing' => 'Press Release',
 			'edit' => 'Press Release',
 			'edits' => 'Press Releases',
-			'supports' => array('title')
+			'supports' => array('title', 'editor')
 		),
 		
 		// P4PF, ISG, FGI Page Sections
 		
-		'pforp_secs' => array(
-			'name' => 'pforp_secs',
+		'p4p_secs' => array(
+			'name' => 'p4p_secs',
 			'label' => 'P4P Sections',
 			'sing' => 'P4P Section',
 			'edit' => 'Section',
@@ -574,6 +574,7 @@ add_image_size( 'header', 960, 360, true );
 add_image_size( 'promo', 320, 210, true );
 add_image_size( 'profile', 193, 193, true );
 add_image_size( 'overlay', 640, 430, true );
+add_image_size( 'overlay_person', 520, 520, true );
 add_image_size( 'news_lead', 590, 300, true );
 add_image_size( 'news_body', 295, 295, true );
 add_image_size( 'timeline', 430, 200, true );
@@ -589,31 +590,28 @@ update_option('thumbnail_crop', 1);
 
 /*
  *
- * HEADER IMAGE FETCHER
+ * IMAGE FETCHER
  *
  */
  
-function img_fecther($size='header', $limit=1) {
+function img_fecther($size='header', $limit=1, $post_id = null) {
 
 	global $post;
 	
-	echo '<div class="images">';
-	
-	if(has_post_thumbnail()){
-		the_post_thumbnail($size);
-		$exclude = get_post_thumbnail_id();
-	}else{
-		$exclude = '';
+	if(!isset($post_id)){
+		$post_id = $post->ID;
 	}
+	
+	//echo '<div class="images">';
+	
 
 	if ($images = get_children(array(
 
-		'post_parent' => $post->ID,
+		'post_parent' => $post_id,
 		'post_type' => 'attachment',
-		'order' => 'DESC',
-		'exclude' => $exclude,
+		'order' => 'menu_order',
 		'numberposts' => $limit,
-		'post_mime_type' => 'image')))
+		'post_mime_type' => 'image'))):
 
 		foreach($images as $image) {
 
@@ -621,7 +619,9 @@ function img_fecther($size='header', $limit=1) {
 			<img src="<?php echo $attachment[0]; ?>" width="<?php echo $attachment[1]; ?>" height="<?php echo $attachment[2]; ?>" /><?php
 
 		}
-	echo '</div><!--.images-->';
+	endif;
+	//echo '</div><!--.images-->';
+	
 }
 
 /*
@@ -660,18 +660,15 @@ function threecol_promos($type){
 			$wp_query = new WP_Query($args);
 			
 			while ( $wp_query->have_posts() ) : $wp_query->the_post();
-				if(has_post_thumbnail()):
-				
 				//get the clickthrough link
 				$meta = get_post_meta($post->ID, '_link_meta', true);				
 				?>
 					<a href="<?php echo $meta['link_url'] ?>" id="post-<?php the_ID(); ?>" <?php post_class(); ?> role="article" rel="bookmark">
 						<h3><? the_title(); ?></h3>
-						<?php the_post_thumbnail('promo'); ?>
-						<?php the_excerpt(); ?>
+						<?php img_fecther('promo', 1);
+						the_excerpt(); ?>
 						<?php the_clickthrough($meta['link_txt']); ?>
 					</a>
-				<?php endif; ?>
 			<?php endwhile; ?>
 	</section><!--#promos-->
 
@@ -682,24 +679,25 @@ function pg_header(){
 	global $post;
 
 	?>
-	
-	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> role="article">
-		<?php
-		if ( is_page_template('page-whatwedo.php') ) { ?>
-			<a href="#" rel=bookmark>
-				<?php img_fecther('header' , 1);?>
-			</a>
-		<?php } else {
-			img_fecther();
-		} ?>
-		<div class="intro">
-			<h1 class="entry-title"><?php the_title(); ?></h1>
-			<div class="entry-content">
-				<?php the_content(); ?>
-			</div><!-- .entry-content -->
-		</div><!-- .intro -->
-		
-	</article><!-- #post-<?php the_ID(); ?> -->
+	<section id="intro">
+		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> role="article">
+			<?php
+			if ( is_page_template('page-whatwedo.php') ) { ?>
+				<a href="#" rel=bookmark>
+					<?php img_fecther('header' , 1);?>
+				</a>
+			<?php } else {
+				img_fecther('header' , -1);
+			} ?>
+			<div class="intro">
+				<h1 class="entry-title"><?php the_title(); ?></h1>
+				<div class="entry-content">
+					<?php the_content(); ?>
+				</div><!-- .entry-content -->
+			</div><!-- .intro -->
+			
+		</article><!-- #post-<?php the_ID(); ?> -->
+	</section><!--#intro-->
 	
 <?php }
 
@@ -708,7 +706,7 @@ function the_timeline_exceprt(){
 
 	global $post; ?>
 	
-	<a href="<?php the_permalink(); ?>" id="post-<?php the_ID(); ?>" <?php post_class(); ?> rel="bookmark">
+	<a href="<?php echo get_permalink() . '#post-' . get_the_ID(); ?>" id="post-<?php the_ID(); ?>" <?php post_class('lightbox'); ?> rel="bookmark">
 
 		<time><?php the_date('F Y');?></time>
 		<?php img_fecther('timeline'); ?>
@@ -723,4 +721,207 @@ function the_timeline_exceprt(){
 	</a><!-- #post-<?php the_ID(); ?> -->
 	
 <?php }
+
+function pagefinder(){
+
+	global $post;
+	$pg_title = get_the_title();
+
+	switch($pg_title){
+		case 'Plant For Peace Foundation':
+			$type = 'p4p';
+			break;
+		case 'International Steering Group':
+			$type = 'isg';
+			break;
+		case 'Funktional Group':
+			$type = 'fgi';
+			break;
+	}
+	
+	return $type;
+	
+}
+function people_profiles(){
+
+	$type = pagefinder() . '_profile';
+	
+	echo '<section id="people" class="profiles fivecol">';
+	echo '<h3>People</h3>';
+	
+		$args = array('post_type' => $type);
+		$wp_query = new WP_Query($args);
+		
+		while ( $wp_query->have_posts() ) : $wp_query->the_post();
+				profile_markup();
+		endwhile;
+	echo '</section><!--#people-->';
+	
+	wp_reset_query();
+	
+}
+
+
+function profile_markup(){
+	global $post ?>
+	
+	<a href="<?php echo get_permalink() . '#post-' . get_the_ID(); ?>" id="post-<?php the_ID(); ?>" <?php post_class('lightbox'); ?> rel="bookmark">
+		<?php img_fecther('profile', 1);
+		the_clickthrough(the_title()); ?>
+	</a><!-- #post-<?php the_ID(); ?> -->
+	
+<?php }
+
+function page_sections($where = false){
+	
+	if($where == true){
+		$type = 'wherework_secs';
+	}else{
+		$type = pagefinder() . '_secs';
+	}
+		
+	echo '<section id="chapters" class="centered">';
+	$args = array('post_type' => $type);
+		$wp_query = new WP_Query($args);
+		
+		while ( $wp_query->have_posts() ) : $wp_query->the_post();
+				section_markup();
+		endwhile;
+	echo '</section><!--#chapters-->';
+	
+	wp_reset_query();
+	
+}
+
+function section_markup(){
+	global $post;?>
+	
+	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+		<h1><?php the_title(); ?> </h1>
+		<div class="entry-content">
+			<div class="images"><?php img_fecther('news_body');?></div><!--.images-->
+			<div class="text"><?php the_content(); ?><!--.text-->
+		</div><!--.entry-content-->
+<?php }
+
+function get_press_releases(){
+	$args = array('post_type' => 'press_rels');
+	$wp_query = new WP_Query($args);
+	echo '<ul id="press-rels">';
+	while ( $wp_query->have_posts() ) : $wp_query->the_post(); 
+	
+		$meta = get_post_meta(get_the_ID(), '_link_meta', true);?>
+		
+		<li id="post-<?php the_ID(); ?>" <?php post_class(); ?> role="article">
+			<header class="entry-header">
+				<div class="entry-meta">
+					<?php
+						printf( __( '<time class="entry-date" datetime="%2$s" pubdate>%3$s</time>', 'themename' ),
+							get_permalink(),
+							get_the_date( 'c' ),
+							get_the_date()
+						);
+					?>
+				</div><!-- .entry-meta -->
+				
+				<h3 class="entry-title"><?php the_title(); ?></h3>
+				
+			</header><!-- .entry-header -->
+
+			<div class="entry-summary">
+				<?php the_excerpt(); ?>
+			</div><!-- .entry-summary -->
+			
+			<a href="<?php echo $meta['link_url']; ?>" class="arrow-link" title="<?php printf( esc_attr__( 'Permalink to %s', 'themename' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php echo $meta['link_txt']; ?></a>
+			
+		</li><!-- #post-<?php the_ID(); ?> --><?php
+			
+	endwhile;
+	
+	echo '</ul><!--#press-rels-->';
+	
+	wp_reset_query();
+}
+
+function thumbs_gallery($identifier){
+
+	$gallery = get_page_by_title($identifier);
+	$gallery = $gallery->ID;
+	echo '<a href="' . get_permalink($gallery) . '" id="image-gallery">';
+	echo img_fecther('thumbnail','12', $gallery);
+	the_clickthrough();
+	echo '</a><!--#image-gallery-->';
+	
+}
+
+function single_profile(){ 
+
+	if ( have_posts() ) while ( have_posts() ) : the_post();
+	
+	$post_types = array('sp_people_profile' ,'sp_company_profile'); ?>
+	
+	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> role="article">
+					<?php img_fecther($size='overlay_person', $limit=1); ?>
+					<div class="profile-content">
+						<header class="entry-header">
+							<h1 class="entry-title"><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'themename' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
+							<div class="entry-meta">
+								<?php
+									if(!in_array(get_post_type(), $post_types)):
+										$meta = get_post_meta(get_the_ID(), '_people_meta', true);
+										echo '<h2>' . $meta['role'] . '</h2>';
+									endif;
+								?>
+							</div><!-- .entry-meta -->
+						</header><!-- .entry-header -->
+	
+						<div class="entry-content">
+							<?php the_content(); ?>
+						</div><!-- .entry-content -->
+	
+						<footer class="entry-meta">
+						
+							<?php if(!in_array(get_post_type(), $post_types)):
+								$meta = get_post_meta(get_the_ID(), '_people_meta', true);
+								$text = $meta['email'];
+								$url = 'mailto:' . $meta['email'];
+							else:
+								$meta = get_post_meta(get_the_ID(), '_link_meta', true);
+								$text = $meta['link_txt'];
+								$url = $meta['link_url'];
+							endif;
+								echo '<a href="' . $url . '" class="arrow-link" target="_blank">' . $text . '</a>';
+							?>
+						</footer><!-- #entry-meta -->
+					<div><!--.profile-content-->
+				</article><!-- #post-<?php the_ID(); ?> -->
+
+				<nav id="nav-below" role="article">
+					<h1 class="section-heading"><?php _e( 'Post navigation', 'themename' ); ?></h1>
+					<div class="nav-previous"><?php previous_post_link( '%link', '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'themename' ) . '</span> %title' ); ?></div>
+					<div class="nav-next"><?php next_post_link( '%link', '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'themename' ) . '</span>' ); ?></div>
+				</nav><!-- #nav-below -->
+
+	<?php endwhile; // end of the loop.
+			
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ?>

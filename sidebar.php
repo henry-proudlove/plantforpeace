@@ -5,27 +5,38 @@
  */
 ?>
 		<div id="secondary" class="widget-area">
-			<?php if ( ! dynamic_sidebar( 'sidebar' ) ) : ?>
+		
+				<aside id="press-releases" class="widget" role="complementary">
+					<h2 class="widget-title">Press Releases</h2>
+					<?php get_press_releases(); ?>
+				</aside><!--#press-releases-->
+				
+				<aside id="image-gallery" class="widget thumb-gallery" role="complementary">
+					<h2 class="widget-title">Images</h2>
+					<?php thumbs_gallery('Image Gallery'); ?>
+				</aside><!--#image-gallery-->
 
-				<aside id="search" class="widget widget_search" role="complementary">
-					<?php get_search_form(); ?>
-				</aside>
+				<aside id="latest-videos" class="widget" role="complementary">
+					<div id="thumbs">
+						<ul class="img-list clearfix"></ul>
+					</div>
+				</aside><!--#latest-videos-->
+				
+				<aside id="brand-assets" class="widget thumb-gallery" role="complementary">
+					<h2 class="widget-title">Brand Assets</h2>
+					<?php thumbs_gallery('Brand Assets'); ?>
+				</aside><!--#brand-assets-->
+				
+				<aside id="categories" class="widget" role="complementary">
+					<h2 class="widget-title">Categories</h2>
+					<?php wp_list_categories('title_li='); ?>
+				</aside><!--#categories-->
 
-				<aside id="archives" class="widget" role="complementary">
-					<h2 class="widget-title"><?php _e( 'Archives', 'themename' ); ?></h2>
-					<ul>
-						<?php wp_get_archives( array( 'type' => 'monthly' ) ); ?>
-					</ul>
-				</aside>
+				<form id="archiveform" action="">
+				<select name="archive_chrono" onchange="window.location =(document.forms.archiveform.archive_chrono[document.forms.archiveform.archive_chrono.selectedIndex].value);">
+				<option value=''>Archives</option>
+				<?php get_archives('monthly','','option'); ?>
+				</select>
+				</form>
 
-				<aside id="meta" class="widget" role="complementary">
-					<h2 class="widget-title"><?php _e( 'Meta', 'themename' ); ?></h2>
-					<ul>
-						<?php wp_register(); ?>
-						<aside role="complementary"><?php wp_loginout(); ?></aside>
-						<?php wp_meta(); ?>
-					</ul>
-				</aside>
-
-			<?php endif; // end sidebar widget area ?>
 		</div><!-- #secondary .widget-area -->

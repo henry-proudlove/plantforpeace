@@ -1,7 +1,7 @@
 <?php
 /**
- * Template Name: Body
- * Description: Body Page template
+ * Template Name: Where we work
+ * Description: Where We Work Page template
  *
  * @package WordPress
  * @subpackage themename
@@ -13,8 +13,7 @@ get_header(); ?>
 			<div id="content">
 			<?php the_post();
 				pg_header();
-				people_profiles();
-				page_sections(); ?>
+				page_sections(true); ?>
 			</div><!-- #content -->
 		</div><!-- #primary -->
 

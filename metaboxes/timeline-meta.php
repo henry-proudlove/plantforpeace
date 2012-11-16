@@ -2,7 +2,7 @@
 
 <?php
 
-$mb->the_field('present-past');
+$mb->the_field('image-video');
 
 if(is_null($mb->get_the_value()))
 
@@ -17,8 +17,8 @@ if(is_null($mb->get_the_value()))
 </p>
 <p>
 	<label>Video URL </label>
-	<input type="text" name="<?php $metabox->the_name('booking-email'); ?>" value="<?php $metabox->the_value('booking-email'); ?>"/>
-	<span>Must be full URL (e.g. http://example.com/example). Video links from vimeo only.
+	<input type="text" name="<?php $metabox->the_name('video_url'); ?>" value="<?php $metabox->the_value('video_url'); ?>"/>
+	<span>Must be full URL (e.g. http://example.com/example)</span>
 </p>
 </div>
 
