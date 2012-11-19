@@ -234,12 +234,12 @@ function async_google_analytics() { ?>
 				),
 				array(
 					'page_title' => 'What We Do',
-					'page_template' => 'page.php',
+					'page_template' => 'page-whatwedo.php',
 					'menu_order' => 1
 				),
 				array(
 					'page_title' => 'How we Work',
-					'page_template' => 'page.php',
+					'page_template' => 'page-howwework.php',
 					'menu_order' => 2
 				),
 				array(
@@ -259,12 +259,12 @@ function async_google_analytics() { ?>
 				),
 				array(
 					'page_title' => 'Where we Work',
-					'page_template' => 'page.php',
+					'page_template' => 'page-wherewework.php',
 					'menu_order' => 6				
 				),
 				array(
 					'page_title' => 'Supporters',
-					'page_template' => 'page.php',
+					'page_template' => 'page-supporters.php',
 					'menu_order' => 7
 				),
 				array(
@@ -274,12 +274,12 @@ function async_google_analytics() { ?>
 				),
 				array(
 					'page_title' => 'Products',
-					'page_template' => 'page.php',
+					'page_template' => 'page-product.php',
 					'menu_order' => 8
 				),
 				array(
 					'page_title' => 'Get Involved',
-					'page_template' => 'page.php',
+					'page_template' => 'page-getinvolved.php',
 					'menu_order' => 10
 				)
 		);
