@@ -612,7 +612,7 @@ update_option('thumbnail_crop', 1);
  *
  */
  
-function img_fecther($size='header', $limit=1, $post_id = null) {
+function img_fecther($size='header', $limit=1, $post_id = null, $bg = false) {
 
 	global $post;
 	
@@ -630,13 +630,34 @@ function img_fecther($size='header', $limit=1, $post_id = null) {
 		'order' => 'menu_order',
 		'numberposts' => $limit,
 		'post_mime_type' => 'image'))):
-
+		
+		
 		foreach($images as $image) {
-
 			$attachment=wp_get_attachment_image_src($image->ID, $size); ?>
 			<img src="<?php echo $attachment[0]; ?>" width="<?php echo $attachment[1]; ?>" height="<?php echo $attachment[2]; ?>" /><?php
-
 		}
+	endif;
+	//echo '</div><!--.images-->';
+	
+}
+
+function bg_img_fecther($size) {
+
+	global $post;
+
+	if ($images = get_children(array(
+
+		'post_parent' => $post->ID,
+		'post_type' => 'attachment',
+		'order' => 'menu_order',
+		'numberposts' => 1,
+		'post_mime_type' => 'image'))):
+		
+		foreach($images as $image) {
+			$attachment = wp_get_attachment_image_src($image->ID, $size);
+			echo $attachment[0];
+		}
+		 
 	endif;
 	//echo '</div><!--.images-->';
 	
@@ -685,8 +706,8 @@ function threecol_promos($type){
 				?>
 					<a href="<?php echo $meta['link_url'] ?>" id="post-<?php the_ID(); ?>" <?php post_class($class . ' box-link'); ?> role="article" rel="bookmark">
 						<h3><? the_title(); ?></h3>
-						<?php img_fecther('promo', 1);
-						the_excerpt(); ?>
+						<div class="image-holder" style="background-image: url('<?php bg_img_fecther('promo'); ?>');"></div>
+						<?php the_excerpt(); ?>
 						<?php the_clickthrough($meta['link_txt']); ?>
 					</a>
 					<?php $i++;
@@ -791,8 +812,8 @@ function profile_markup($class){
 	global $post ?>
 	
 	<a href="<?php echo get_permalink() . '#post-' . get_the_ID(); ?>" id="post-<?php the_ID(); ?>" <?php post_class($class . ' box-link lightbox'); ?> rel="bookmark">
-		<?php img_fecther('profile', 1);
-		the_clickthrough(get_the_title()); ?>
+		<div class="image-holder" style="background-image: url('<?php bg_img_fecther('profile'); ?>');"></div>
+		<?php the_clickthrough(get_the_title()); ?>
 	</a><!-- #post-<?php the_ID(); ?> -->
 	
 	

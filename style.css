@@ -575,14 +575,6 @@ section{
 	float: left;
 }
 
-#promos > .box-link{
-	width: 319px;
-}
-
-.profiles > .box-link{
-	width: 192px;
-}
-
 h1, h2, h3, .box-link p{
 	margin: 18px 25px;
 }
@@ -667,23 +659,33 @@ img{
 
 /*
  *
- * PROFILES
+ * PROFILES & PROMOS
  *
  */	
 
-#promos > a, .profiles > a {
+#promos > .box-link, .profiles > .box-link {
 	border-width: 0 1px;
 	border-style: solid;
 	border-color: #f6f3f0;
 }
 
-#promos > a.first, #profiles > a.first {
+#promos > .box-link.first, .profiles > .box-link.first {
 	border-width: 0 1px 0 0;
 	border-style: solid;
 	border-color: #f6f3f0;
 }
 
-#promos > a.last, #profiles > a.last {
+#promos .image-holder{
+	background-repeat: no-repeat;
+	height: 210px;
+}
+
+.profiles .image-holder{
+	background-repeat: no-repeat;
+	height: 193px;
+}
+
+#promos > .box-link.last, .profiles > .box-link.last {
 	border-width: 0 0 0 1px;
 	border-style: solid;
 	border-color: #f6f3f0;
@@ -694,6 +696,25 @@ img{
 	white-space: no-wrap;
 	text-overflow: ellipsis;
 }
+
+#promos > .box-link{
+	width: 318px;
+}
+
+#promos > .box-link.first, #promos > .box-link.last{
+	width: 319px;
+}
+
+.profiles > .box-link{
+	width: 190px;
+}
+
+.profiles > .box-link.first, .profiles > .box-link.last{
+	width: 191px;
+}
+
+
+
 
 
 
