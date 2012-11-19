@@ -2,6 +2,26 @@
 GET LATEST FROM STOLENRECS VIMEO
 */
 
+
+jQuery.fn.introHeight = function(){
+	if($(this).length > 1){
+		$(this).parent().addClass('columnise');
+		$firstP = $(this[0]);
+		$restP = $(this).slice(1);
+		console.log($restP);
+		$firstP.wrap('<div class="left" />');
+		$restP.wrapAll('<div class="right" />');
+	}
+};
+
+jQuery.fn.cycleInit = function(){
+	if(this.children().size() > 1){	
+		$(this).addClass('cycle').after('<nav id="pager">').cycle({
+			pager:  '#pager'
+		});
+	}
+};
+
 var apiEndpoint = 'http://vimeo.com/api/v2/';
 var videosCallback = 'setupGallery';
 var vimeoUsername = '3362379';
@@ -9,9 +29,9 @@ var vimeoUsername = '3362379';
 // Get the user's videos
 $(document).ready(function() {
 	$.getScript(apiEndpoint + vimeoUsername + '/videos.json?callback=' + videosCallback);
-	$('#header-images').after('<div id="nav">').cycle({
-		pager:  '#nav'
-	});
+	$('#header-images').cycleInit();
+	$(".page-intro .entry-content p").introHeight();
+	
 });
 
 function setupGallery(videos) {

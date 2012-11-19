@@ -33,7 +33,7 @@ get_header(); ?>
 									);
 								?>
 							</div><!-- .entry-meta -->
-							<h1 class="entry-title"><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'themename' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
+							<h1 class="entry-title"><?php the_title(); ?></h1>
 						</header><!-- .entry-header -->
 	
 						<div class="entry-content">

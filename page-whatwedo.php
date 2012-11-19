@@ -14,11 +14,11 @@ get_header(); ?>
 				<?php the_post(); ?>
 				<?php pg_header(); ?>
 				<section id="timeline">
-					<div="left">
+					<div id="left">
 					
 						<?php $meta = get_post_meta($post->ID, '_timeline_intro_meta', true);
 						echo '<article id="timeline-intro">';
-						echo '<h3>' . $meta['intro_title'] . '</h3>';
+						echo '<h2>' . $meta['intro_title'] . '</h2>';
 						echo '<p>' . $meta['intro_text'] . '</p>';
 						echo '</article><!--#timeline-intro-->';
 						
@@ -27,19 +27,19 @@ get_header(); ?>
 						$wp_query = new WP_Query($args);
 						while ( $wp_query->have_posts() ) : $wp_query->the_post();
 						$i++;
-						if(($i % 2) == 1){
+						if(($i % 2) == 0){
 							the_timeline_exceprt();
 						}
 						endwhile;
 					?>
 					</div><!--#left-->
-					<div="right">
+					<div id="right">
 					<?php 
 						$wp_query = new WP_Query($args);
 						$i=0;
 						while ( $wp_query->have_posts() ) : $wp_query->the_post();
 						$i++;
-						if(($i % 2) == 0){
+						if(($i % 2) == 1){
 							the_timeline_exceprt();
 						}
 						endwhile;

@@ -14,13 +14,15 @@ get_header(); ?>
 			<?php the_post();
 				pg_header();
 				echo '<section id="supporters-people" class="profiles threecol">';
-				echo '<h3>People</h3>';
+				echo '<h3>Where to Buy</h3>';
 			
 					$args = array('post_type' => 'retailer_profile');
 					$wp_query = new WP_Query($args);
-					
+					$i=0;
 					while ( $wp_query->have_posts() ) : $wp_query->the_post();
-							profile_markup();
+							$class = rowpos_class($i , 2);
+							profile_markup($class);
+							$i++;
 					endwhile;
 				echo '</section><!--#supporters-people-->';
 				

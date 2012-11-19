@@ -220,6 +220,24 @@ function async_google_analytics() { ?>
 
 /*
  *
+ * CUSTOM EXCERPT 
+ *
+ */
+
+function p4p_excerpt_length($length) {
+	return 20;
+}
+
+add_filter('excerpt_length', 'p4p_excerpt_length');
+
+function p4p_excerpt_more($more) {
+	global $post;
+	return '...';
+}
+add_filter('excerpt_more', 'p4p_excerpt_more');
+
+/*
+ *
  * CREATE PAGES ON THEME ACTIVATION
  *
  */
@@ -652,8 +670,8 @@ function the_clickthrough($text = 'Find out more'){
 
 function threecol_promos($type){ 
 
-	global $post;?>
-	
+	global $post;
+	$i=1;?>
 	<section id="promos" class="threecol">
 		<?php
 			$args = array('post_type' => $type , 'posts_per_page' => '3');
@@ -662,14 +680,17 @@ function threecol_promos($type){
 			while ( $wp_query->have_posts() ) : $wp_query->the_post();
 				//get the clickthrough link
 				$meta = get_post_meta($post->ID, '_link_meta', true);				
+				$class = rowpos_class($i , 3);
+				
 				?>
-					<a href="<?php echo $meta['link_url'] ?>" id="post-<?php the_ID(); ?>" <?php post_class(); ?> role="article" rel="bookmark">
+					<a href="<?php echo $meta['link_url'] ?>" id="post-<?php the_ID(); ?>" <?php post_class($class . ' box-link'); ?> role="article" rel="bookmark">
 						<h3><? the_title(); ?></h3>
 						<?php img_fecther('promo', 1);
 						the_excerpt(); ?>
 						<?php the_clickthrough($meta['link_txt']); ?>
 					</a>
-			<?php endwhile; ?>
+					<?php $i++;
+			 endwhile; ?>
 	</section><!--#promos-->
 
 <?php }
@@ -682,7 +703,7 @@ function pg_header(){
 	<section id="intro">
 		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> role="article">
 			<?php
-			echo '<div id="header-images">';
+			echo '<div id="carousel"><div id="header-images">';
 			if ( is_page_template('page-whatwedo.php') ) { ?>
 				<a href="#" rel=bookmark>
 					<?php img_fecther('header' , 1);?>
@@ -690,10 +711,10 @@ function pg_header(){
 			<?php } else {
 				img_fecther('header' , -1);
 			}
-			echo '</div><!--#header-images-->';?>
-			<div class="intro">
+			echo '</div><!--#header-images--></div><!--#carousel-->';?>
+			<div class="page-intro">
 				<h1 class="entry-title"><?php the_title(); ?></h1>
-				<div class="entry-content">
+				<div class="entry-content clearfix">
 					<?php the_content(); ?>
 				</div><!-- .entry-content -->
 			</div><!-- .intro -->
@@ -708,12 +729,12 @@ function the_timeline_exceprt(){
 
 	global $post; ?>
 	
-	<a href="<?php echo get_permalink() . '#post-' . get_the_ID(); ?>" id="post-<?php the_ID(); ?>" <?php post_class('lightbox'); ?> rel="bookmark">
+	<a href="<?php echo get_permalink() . '#post-' . get_the_ID(); ?>" id="post-<?php the_ID(); ?>" <?php post_class('lightbox box-link'); ?> rel="bookmark">
 
 		<time><?php the_date('F Y');?></time>
 		<?php img_fecther('timeline'); ?>
 		<div class="intro">
-			<h1 class="entry-title"><?php the_title(); ?></h1>
+			<h3 class="entry-title"><?php the_title(); ?></h3>
 			<div class="entry-summary">
 				<?php the_excerpt(); ?>
 				<?php the_clickthrough('Read More'); ?>
@@ -748,14 +769,16 @@ function people_profiles(){
 
 	$type = pagefinder() . '_profile';
 	
-	echo '<section id="people" class="profiles fivecol">';
+	echo '<section id="people" class="profiles">';
 	echo '<h3>People</h3>';
 	
 		$args = array('post_type' => $type);
 		$wp_query = new WP_Query($args);
-		
+		$i=1;
 		while ( $wp_query->have_posts() ) : $wp_query->the_post();
-				profile_markup();
+				$class = rowpos_class($i , 5);
+				profile_markup($class);
+				$i++;
 		endwhile;
 	echo '</section><!--#people-->';
 	
@@ -764,13 +787,14 @@ function people_profiles(){
 }
 
 
-function profile_markup(){
+function profile_markup($class){
 	global $post ?>
 	
-	<a href="<?php echo get_permalink() . '#post-' . get_the_ID(); ?>" id="post-<?php the_ID(); ?>" <?php post_class('lightbox'); ?> rel="bookmark">
+	<a href="<?php echo get_permalink() . '#post-' . get_the_ID(); ?>" id="post-<?php the_ID(); ?>" <?php post_class($class . ' box-link lightbox'); ?> rel="bookmark">
 		<?php img_fecther('profile', 1);
-		the_clickthrough(the_title()); ?>
+		the_clickthrough(get_the_title()); ?>
 	</a><!-- #post-<?php the_ID(); ?> -->
+	
 	
 <?php }
 
@@ -906,6 +930,19 @@ function single_profile(){
 
 	<?php endwhile; // end of the loop.
 			
+}
+
+function rowpos_class($i , $divider){
+		
+		if($i % $divider == 1){
+			$class = 'first';
+		}elseif($i % $divider == 0){
+			$class = 'last';
+		}else{
+			$class = '';
+		}
+		
+		return $class;
 }
 
 

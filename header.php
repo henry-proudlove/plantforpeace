@@ -51,7 +51,7 @@
 	
     <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); echo '?' . filemtime( get_stylesheet_directory() . '/style.css'); ?>" type="text/css" media="screen, projection" />
     
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/colorbox.css'" type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/colorbox.css" type="text/css" media="screen, projection" />
 
 	<?php if ( is_singular() && get_option( 'thread_comments' ) ) wp_enqueue_script( 'comment-reply' ); ?>
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
@@ -61,6 +61,16 @@
     <![endif]-->
 	
 	<?php wp_head(); ?>
+	<script type="text/javascript">
+		var MTIProjectId='ff357b16-bc31-427f-b50c-12544ca90a9c';
+		 (function() {
+				var mtiTracking = document.createElement('script');
+				mtiTracking.type='text/javascript';
+				mtiTracking.async='true';
+				mtiTracking.src=('https:'==document.location.protocol?'https:':'http:')+'//fast.fonts.com/t/trackingCode.js';
+				(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild( mtiTracking );
+		   })();
+	</script>
 	</head>
 	
 	<body <?php body_class(); ?>>
