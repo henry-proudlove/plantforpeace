@@ -75,7 +75,8 @@
 	
 	<body <?php body_class(); ?>>
 	<div id="page" class="hfeed">
-		<header id="branding" role="banner">
+		<header id="branding" role="banner" class="clearfix">
+			<div id="branding-holder">
 				<hgroup>
 					<h1 id="site-title"><span><a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></span></h1>
 				</hgroup>
@@ -84,6 +85,12 @@
 					<div class="skip-link visuallyhidden"><a href="#content" title="<?php esc_attr_e( 'Skip to content', 'themename' ); ?>"><?php _e( 'Skip to content', 'themename' ); ?></a></div>
 					<?php wp_nav_menu( array( 'theme_location' => 'primary' ) ); ?>
 				</nav><!-- #access -->
+			<?php 
+				$target = get_page_by_title('Get Involved');
+				$target = $target->guid;
+			?>
+			<a href="<?php echo $target ?>" id="get-involved-nav" rel="bookmark"><div><span id="get">Get</span> <span id="involved">Involved</span></div></a>
+			</div><!--#branding-holder-->
 		</header><!-- #branding -->
 	
 	

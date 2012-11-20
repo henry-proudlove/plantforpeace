@@ -13,12 +13,7 @@ get_header(); ?>
 			<div id="content">
 
 				<?php the_post(); ?>
-				<div class="intro">
-					<h1 class="entry-title"><?php the_title(); ?></h1>
-					<div class="entry-content">
-						<?php the_content(); ?>
-					</div><!-- .entry-content -->
-				</div><!-- .intro -->
+				<?php pg_header(); ?>
 				<div id="galleria" style="width: 750px; height: 490px;>
 					<?php img_fecther('medium', -1); ?>
 				</div><!--#galleria-->

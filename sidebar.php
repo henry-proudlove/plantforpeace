@@ -7,12 +7,12 @@
 		<div id="secondary" class="widget-area">
 		
 				<aside id="press-releases" class="widget" role="complementary">
-					<h2 class="widget-title">Press Releases</h2>
+					<h3 class="widget-title">Press Releases</h3>
 					<?php get_press_releases(); ?>
 				</aside><!--#press-releases-->
 				
 				<aside id="image-gallery" class="widget thumb-gallery" role="complementary">
-					<h2 class="widget-title">Images</h2>
+					<h3 class="widget-title">Images</h3>
 					<?php thumbs_gallery('Image Gallery'); ?>
 				</aside><!--#image-gallery-->
 
@@ -23,12 +23,12 @@
 				</aside><!--#latest-videos-->
 				
 				<aside id="brand-assets" class="widget thumb-gallery" role="complementary">
-					<h2 class="widget-title">Brand Assets</h2>
+					<h3 class="widget-title">Brand Assets</h3>
 					<?php thumbs_gallery('Brand Assets'); ?>
 				</aside><!--#brand-assets-->
 				
 				<aside id="categories" class="widget" role="complementary">
-					<h2 class="widget-title">Categories</h2>
+					<h3 class="widget-title">Categories</h3>
 					<?php wp_list_categories('title_li='); ?>
 				</aside><!--#categories-->
 

@@ -701,7 +701,7 @@ function threecol_promos($type){
 			while ( $wp_query->have_posts() ) : $wp_query->the_post();
 				//get the clickthrough link
 				$meta = get_post_meta($post->ID, '_link_meta', true);				
-				$class = rowpos_class($i , 3);
+				$class = rowpos_class($i , 3, $wp_query->post_count);
 				
 				?>
 					<a href="<?php echo $meta['link_url'] ?>" id="post-<?php the_ID(); ?>" <?php post_class($class . ' box-link'); ?> role="article" rel="bookmark">
@@ -725,15 +725,23 @@ function pg_header(){
 		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> role="article">
 			<?php
 			echo '<div id="carousel"><div id="header-images">';
-			if ( is_page_template('page-whatwedo.php') ) { ?>
-				<a href="#" rel=bookmark>
-					<?php img_fecther('header' , 1);?>
-				</a>
-			<?php } else {
+			
+			if(is_page_template('page-whatwedo.php')){?>
+				<a href="#" rel="bookmark"><?php img_fecther('header' , 1) ?></a> <?php
+			}else if(is_page_template('page-gallery.php')){
+			}else{
 				img_fecther('header' , -1);
 			}
-			echo '</div><!--#header-images--></div><!--#carousel-->';?>
+
+			echo '</div><!--#header-images--></div><!--#carousel-->'; ?>
+
 			<div class="page-intro">
+				<?php
+					$parent = get_parent();
+					if($parent){?>
+						<h3 class="breadcrumb"><a href="<?php echo get_permalink($parent); ?>" rel="bookmark"><?php echo get_the_title($parent); ?></a></h3><?php
+					} 
+				?>
 				<h1 class="entry-title"><?php the_title(); ?></h1>
 				<div class="entry-content clearfix">
 					<?php the_content(); ?>
@@ -797,7 +805,7 @@ function people_profiles(){
 		$wp_query = new WP_Query($args);
 		$i=1;
 		while ( $wp_query->have_posts() ) : $wp_query->the_post();
-				$class = rowpos_class($i , 5);
+				$class = rowpos_class($i , 5, $wp_query->post_count);
 				profile_markup($class);
 				$i++;
 		endwhile;
@@ -843,12 +851,13 @@ function page_sections($where = false){
 function section_markup(){
 	global $post;?>
 	
-	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+	<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?>>
 		<h1><?php the_title(); ?> </h1>
 		<div class="entry-content">
-			<div class="images"><?php img_fecther('news_body');?></div><!--.images-->
+			<div class="images"><?php img_fecther('news_body', -1);?></div><!--.images-->
 			<div class="text"><?php the_content(); ?><!--.text-->
 		</div><!--.entry-content-->
+	</article><!--#post-<?php the_ID(); ?>-->
 <?php }
 
 function get_press_releases(){
@@ -953,17 +962,39 @@ function single_profile(){
 			
 }
 
-function rowpos_class($i , $divider){
+function rowpos_class($i , $divider, $total){
+	//echo $total;
+	if($i % $divider == 1){
+		$class = 'left ';
+	}elseif($i % $divider == 0){
+		$class = 'right ';
+	}else{
+		$class = '';
+	}
 		
-		if($i % $divider == 1){
-			$class = 'first';
-		}elseif($i % $divider == 0){
-			$class = 'last';
-		}else{
-			$class = '';
+	$lastrow = $total % $divider;
+	$lastrow = $i - $total + $lastrow;
+			
+	if($lastrow > 0){
+		$class .= 'bottom';
+		if($i == $total){
+			$class .= ' widow';
 		}
-		
-		return $class;
+	}else if($total <= $divider){
+		$class .= 'bottom';
+	}
+	
+	return $class;
+}
+
+function get_parent() {
+	global $wp_query;
+	$parent = $wp_query->post->post_parent;
+	if($parent != 0){
+		return $wp_query->post->post_parent;
+	}else{
+		return false;
+	}
 }
 
 
