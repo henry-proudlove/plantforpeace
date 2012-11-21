@@ -8,12 +8,13 @@
  */
 
 get_header(); ?>
-		
+		<?php
+			the_post();
+			pg_header();
+		?>		
 		<div id="primary">
 			<div id="content">
 
-				<?php the_post(); ?>
-				<?php pg_header(); ?>
 				<div id="galleria" style="width: 750px; height: 490px;>
 					<?php img_fecther('medium', -1); ?>
 				</div><!--#galleria-->

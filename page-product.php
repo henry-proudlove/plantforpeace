@@ -16,7 +16,7 @@ get_header(); ?>
 				echo '<section id="retailers" class="profiles threecol">';
 				echo '<h3>Where to Buy</h3>';
 			
-					$args = array('post_type' => 'retailer_profile');
+					$args = array('post_type' => 'retailer_profile', 'posts_per_page' => '-1');
 					$wp_query = new WP_Query($args);
 					$i=1;
 					while ( $wp_query->have_posts() ) : $wp_query->the_post();

@@ -729,6 +729,7 @@ function pg_header(){
 			if(is_page_template('page-whatwedo.php')){?>
 				<a href="#" rel="bookmark"><?php img_fecther('header' , 1) ?></a> <?php
 			}else if(is_page_template('page-gallery.php')){
+			}else if(is_page_template('page-gallery.php')){
 			}else{
 				img_fecther('header' , -1);
 			}
@@ -801,7 +802,7 @@ function people_profiles(){
 	echo '<section id="people" class="profiles">';
 	echo '<h3>People</h3>';
 	
-		$args = array('post_type' => $type);
+		$args = array('post_type' => $type, 'posts_per_page' => '-1');
 		$wp_query = new WP_Query($args);
 		$i=1;
 		while ( $wp_query->have_posts() ) : $wp_query->the_post();
@@ -836,7 +837,7 @@ function page_sections($where = false){
 	}
 		
 	echo '<section id="chapters" class="centered">';
-	$args = array('post_type' => $type);
+	$args = array('post_type' => $type, 'posts_per_page' => '-1');
 		$wp_query = new WP_Query($args);
 		
 		while ( $wp_query->have_posts() ) : $wp_query->the_post();
@@ -861,7 +862,7 @@ function section_markup(){
 <?php }
 
 function get_press_releases(){
-	$args = array('post_type' => 'press_rels');
+	$args = array('post_type' => 'press_rels', 'posts_per_page' => '-1');
 	$wp_query = new WP_Query($args);
 	echo '<ul id="press-rels">';
 	while ( $wp_query->have_posts() ) : $wp_query->the_post(); 

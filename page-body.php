@@ -8,13 +8,16 @@
  */
  
 get_header(); ?>
-
+		<?php 
+			the_post();
+			pg_header();
+		?>
 		<div id="primary">
 			<div id="content">
-			<?php the_post();
-				pg_header();
-				people_profiles();
-				page_sections(); ?>
+				<?php
+					people_profiles();
+					page_sections();
+				?>
 			</div><!-- #content -->
 		</div><!-- #primary -->
 

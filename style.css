@@ -542,7 +542,8 @@ time,
 .page-intro .entry-content > p, 
 .page-intro .entry-content .left, 
 .entry-content > p:first-child,
-.centered .text p:first-child
+.centered .text p:first-child,
+a.button
 {
 	font-family: Trade Gothic, arial, sans-serif;
 	text-transform: uppercase;
@@ -577,7 +578,7 @@ h2,
 .centered .entry-content p:first-child
 {
 	font-size: 2em;
-	color: rgba(89,86,81,0.4);
+	color: #9e9c98;
 }
 
 .page-intro .entry-content > p,
@@ -627,7 +628,7 @@ time{
 }
 
 section{
-	clear:both;
+	/*clear:both;*/
 }
 
 .box-link{
@@ -664,24 +665,19 @@ img{
  */
 
 #timeline {
-	padding: 45px 25px;
+	margin: 45px 25px 0;
+	padding-bottom: 45px;
+	background: url('images/timeline-divider.png') repeat-y top center;
 }
 
 #timeline #left, #timeline #right{
-	width: 428px;
+	width: 430px;
 	float: left;
-	border-color: #f7f4f1;
-	border-style: solid;
 }
 
 #timeline #left{
 	padding-right: 25px;
-	border-right-width: 2px;
 	position: relative;
-}
-
-#timeline #right{
-	border-left-width: 2px;
 }
 
 #timeline #left .box-link{
@@ -695,14 +691,14 @@ img{
 #timeline #right .box-link{
 	background-image: url(images/timeline-marker-right.svg);
 	padding-left: 31px;
-	margin-left: -8px;
+	margin-left: -6px;
 	background-repeat: no-repeat;
 	background-position-x: left;
 	background-position-y: 47%;
 	position: relative;
 }
 
-#timeline h3, #timeline p, #timeline {
+#timeline h3, #timeline p {
 	margin: 0;
 	padding-bottom: 5px;
 }
@@ -808,6 +804,7 @@ img{
 
 #carousel{
 	position: relative;
+	min-height: 55px;
 }
 
 #pager{
@@ -819,9 +816,18 @@ img{
 	width: 960px;
 }
 
-.page-intro{
+/*
+ *
+ * PAGE INTRO
+ *
+ */
+
+section#intro{
 	background: #e2dace;
-	padding: 30px 25px 35px
+}
+
+.page-intro{
+	padding: 30px 25px 30px
 }
 
 .page-intro .entry-title{
@@ -1031,6 +1037,118 @@ h3.breadcrumb a{
 	font-size: 1.5em;
 	line-height: 1em;
 }
+
+/*
+ *
+ * GET INVOlVED
+ *
+ */
+
+section#get-involved{
+	padding: 25px 25px 40px;
+	background: url('images/split-body-bg.png') repeat-y top center;
+}
+
+section#get-involved section{
+	width: 430px;
+	float: left;
+}
+
+section#get-involved h2,  section#get-involved h3{
+ 	padding: 0 0 40px;
+ 	margin: 0;
+}
+
+section#get-involved h3{
+	padding: 0 0 10px;
+	margin: 0;
+}
+
+section#get-involved article{
+	margin-bottom: 30px;
+}
+
+section#get-involved section#donate{
+	padding-right: 25px;
+}
+
+section#get-involved section#participate{
+	padding-left: 25px;
+}
+
+section#get-involved p{
+	padding-top: 0;
+}
+
+
+a.button{
+	display: inline-block;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	width: auto;
+	padding: 13px 30px;
+	margin-bottom: 22px;
+	color: #595752;
+	background-color: #F0EDE6;
+	font-size: 1.2em;
+}
+
+.button.red{
+	background: #ce2129;
+	color: white;
+}
+
+.button.facebook{
+	background-image: url('images/ico-fb.svg');
+	background-repeat: no-repeat;
+	background-position: 19px 8px;
+	padding-left: 55px;
+	background-color: #4c70a9;
+	color: white;
+}
+
+.button.twitter{
+	background-image: url('images/ico-tw.svg');
+	background-repeat: no-repeat;
+	background-position: 15px 11px;
+	padding-left: 55px;
+	background-color: #24aae1;
+	color: white;
+}
+
+.button.newsletter{
+	background-image: url('images/ico-mail.svg');
+	background-repeat: no-repeat;
+	background-position: 14px 12px;
+	padding-left: 55px;
+}
+
+section#get-involved #products header{
+	margin-bottom: 12px;
+}
+
+section#get-involved section#donate p{
+	margin-bottom: 12px;
+}
+
+section#get-involved .contact-form form{
+	padding: 12px 0;
+}
+
+section#get-involved .contact-form form textarea{
+	width: 408px;
+}
+
+section#get-involved .contact-form form input[type='text']{
+	width: 230px;
+}
+
+
+
+
+
+
 
 
 

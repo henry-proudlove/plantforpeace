@@ -12,21 +12,21 @@ get_header(); ?>
 		<div id="primary">
 			<div id="content">
 				<div class="intro">
-					<h1 class="entry-title"><?php the_title(); ?></h1>
+					<?php pg_header(); ?>
 				</div><!-- .intro -->
-				<section id="get-involved">
-					<section id="dontate" class="threecol">
+				<section id="get-involved" class="clearfix">
+					<section id="donate" class="clearfix">
 						<h2>Donate</h2>
 						<article id="products">
 							<header>
 								<h3>Buy Our Products</h3>
-								<img src="<?php echo get_template_directory_uri() . '/images/get_involved_product.jpg'; ?>" width="430" height="200" alt="Fruit Bar" />
+								<img src="<?php echo get_template_directory_uri() . '/images/get_involved_product.jpg'; ?>" width="430" height="182" alt="Fruit Bar" />
 							</header>
 							<p>Maecenas faucibus mollis interdum. Donec sed odio dui. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus</p>
 							<footer>
 								<?php 
 								$product_page = get_page_by_title('Products');
-								$product_page = $product_page->guid;
+								$product_page = get_permalink($product_page->ID);
 								?>
 								<a href="<?php echo $product_page ?>" class="button red" rel="bookmark">More About Our Products</a>
 							</footer>
@@ -41,7 +41,7 @@ get_header(); ?>
 							</footer>
 						</article><!--#donate-link-->
 					</section><!--#donate-->
-					<section id="dontate" class="threecol">
+					<section id="participate" class="clearfix">
 						<h2>Participate</h2>
 						<article id="follow">
 							<header>
@@ -51,7 +51,7 @@ get_header(); ?>
 							<a href="#" class="button twitter" rel="bookmark">Join the Campaign on Twitter</a>
 							<a href="#" class="button newsletter" rel="bookmark">Subscribe to our newsletter</a>
 						</article><!--#follow-->
-						<article id="donate-link">
+						<article class="contact-form">
 							<header>
 								<h3>Join us</h3>
 							</header>

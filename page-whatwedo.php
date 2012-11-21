@@ -13,7 +13,7 @@ get_header(); ?>
 			<div id="content">
 				<?php the_post(); ?>
 				<?php pg_header(); ?>
-				<section id="timeline">
+				<section id="timeline" class="clearfix">
 					<div id="left">
 					
 						<?php $meta = get_post_meta($post->ID, '_timeline_intro_meta', true);
@@ -23,7 +23,7 @@ get_header(); ?>
 						echo '</article><!--#timeline-intro-->';
 						
 						$i=0;
-						$args = array('post_type' => 'timeline');
+						$args = array('post_type' => 'timeline', 'posts_per_page' => '-1');
 						$wp_query = new WP_Query($args);
 						while ( $wp_query->have_posts() ) : $wp_query->the_post();
 						$i++;

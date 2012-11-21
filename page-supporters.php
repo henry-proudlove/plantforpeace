@@ -16,7 +16,7 @@ get_header(); ?>
 				echo '<section id="supporters-people" class="profiles clearfix">';
 				echo '<h3>People</h3>';
 			
-					$args = array('post_type' => 'sp_people_profile');
+					$args = array('post_type' => 'sp_people_profile', 'posts_per_page' => '-1');
 					$wp_query = new WP_Query($args);
 					$i=1;
 					while ( $wp_query->have_posts() ) : $wp_query->the_post();
@@ -31,7 +31,7 @@ get_header(); ?>
 				echo '<section id="supporters-companies" class="profiles clearfix">';
 				echo '<h3>Companies</h3>';
 			
-					$args = array('post_type' => 'sp_company_profile');
+					$args = array('post_type' => 'sp_company_profile' , 'posts_per_page' => '-1');
 					$wp_query = new WP_Query($args);
 					$i=1;
 					while ( $wp_query->have_posts() ) : $wp_query->the_post();

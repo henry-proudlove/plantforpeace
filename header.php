@@ -87,7 +87,7 @@
 				</nav><!-- #access -->
 			<?php 
 				$target = get_page_by_title('Get Involved');
-				$target = $target->guid;
+				$target = get_permalink($target->ID);
 			?>
 			<a href="<?php echo $target ?>" id="get-involved-nav" rel="bookmark"><div><span id="get">Get</span> <span id="involved">Involved</span></div></a>
 			</div><!--#branding-holder-->
