@@ -331,6 +331,16 @@ add_filter('get_the_date', 'p4p_post_date');
 					'page_title' => 'Get Involved',
 					'page_template' => 'page-getinvolved.php',
 					'menu_order' => 10
+				),
+				array(
+					'page_title' => 'Image Gallery',
+					'page_template' => 'page-gallery.php',
+					'menu_order' => 10
+				),
+				array(
+					'page_title' => 'Brand Assets',
+					'page_template' => 'page-gallery.php',
+					'menu_order' => 10
 				)
 		);
 	$page_count = count($pforp_pages);
