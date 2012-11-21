@@ -7,12 +7,13 @@
  * @subpackage themename
  */
  
-get_header(); ?>
-
+get_header();
+		the_post();
+		pg_header(); ?>
+		
 		<div id="primary">
 			<div id="content">
-			<?php the_post();
-				pg_header();
+			<?php
 				echo '<section id="supporters-people" class="profiles clearfix">';
 				echo '<h3>People</h3>';
 			

@@ -7,12 +7,12 @@
  * @subpackage themename
  */
  
-get_header(); ?>
+get_header(); 
+		the_post(); 
+		pg_header(); ?>
 
 		<div id="primary">
 			<div id="content">
-				<?php the_post(); ?>
-				<?php pg_header(); ?>
 				<section id="timeline" class="clearfix">
 					<div id="left">
 					

@@ -7,13 +7,13 @@
  * @subpackage themename
  */
  
-get_header(); ?>
+get_header();
+		the_post();
+		pg_header(); ?>
 
 		<div id="primary">
 			<div id="content">
-			<?php the_post();
-				pg_header();
-				page_sections(true); ?>
+				<?php page_sections(true); ?>
 			</div><!-- #content -->
 		</div><!-- #primary -->
 

@@ -7,12 +7,13 @@
  * @subpackage themename
  */
  
-get_header(); ?>
-
+get_header();
+		the_post();
+		pg_header(); ?>
+		
 		<div id="primary">
 			<div id="content">
-			<?php the_post();
-				pg_header();
+			<?php
 				echo '<section id="retailers" class="profiles threecol">';
 				echo '<h3>Where to Buy</h3>';
 			

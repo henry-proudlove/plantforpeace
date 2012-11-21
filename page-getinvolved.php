@@ -7,12 +7,13 @@
  * @subpackage themename
  */
  
-get_header(); ?>
+get_header();
+		the_post();
+		pg_header(); ?>
 
 		<div id="primary">
 			<div id="content">
 				<div class="intro">
-					<?php pg_header(); ?>
 				</div><!-- .intro -->
 				<section id="get-involved" class="clearfix">
 					<section id="donate" class="clearfix">

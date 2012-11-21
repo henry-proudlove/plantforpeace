@@ -7,11 +7,10 @@
  * @subpackage themename
  */
 
-get_header(); ?>
-		<?php
-			the_post();
-			pg_header();
-		?>		
+get_header();
+		the_post();
+		pg_header();
+		?>
 		<div id="primary">
 			<div id="content">
 
