@@ -21,10 +21,8 @@ get_header(); ?>
 				<?php endwhile; ?>
 			</div><!--.header-images-->
 		</section><!--#carousel-->
-		<div id="primary">
-			<div id="content">
-				<?php threecol_promos('hp_promos'); ?>
-			</div><!-- #content -->
-		</div><!-- #primary -->
+		<div id="content">
+			<?php threecol_promos('hp_promos'); ?>
+		</div><!-- #content -->
 
 <?php get_footer(); ?>

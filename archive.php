@@ -5,32 +5,35 @@
  */
 
 get_header(); ?>
-
-		<section id="primary" role="region">
-			<div id="content">
-
-				<?php the_post(); ?>
-
-				<header class="page-header">
-					<h1 class="page-title">
-						<?php if ( is_day() ) : ?>
-							<?php printf( __( 'Daily Archives: <span>%s</span>', 'themename' ), get_the_date() ); ?>
+		the_post(); ?>
+		<section id="intro">
+			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> role="article">
+				<div id="carousel"></div>
+				<div class="page-intro">
+					<?php if ( is_day() ) : ?>
+							<h3 class="breadcrumb">Daily Archives</h3> 
+							<?php printf( __( '<h1 class="entry-title">%s</h1>', 'themename' ), get_the_date() ); ?>
 						<?php elseif ( is_month() ) : ?>
-							<?php printf( __( 'Monthly Archives: <span>%s</span>', 'themename' ), get_the_date( 'F Y' ) ); ?>
+							<h3 class="breadcrumb">Monthly Archives</h3>
+							<?php printf( __( '<h1 class="entry-title">%s</h1>' ), get_the_date( 'F Y' ) ); ?>
 						<?php elseif ( is_year() ) : ?>
-							<?php printf( __( 'Yearly Archives: <span>%s</span>', 'themename' ), get_the_date( 'Y' ) ); ?>
+							<h3 class="breadcrumb">Yearly Archives</h3> 
+							<?php printf( __( '<h1 class="entry-title">%s</h1>', 'themename' ), get_the_date( 'Y' ) ); ?>
 						<?php else : ?>
 							<?php _e( 'Blog Archives', 'themename' ); ?>
 						<?php endif; ?>
-					</h1>
-				</header>
-
-				<?php rewind_posts(); ?>
-
-				<?php get_template_part( 'loop', 'archive' ); ?>
-
-			</div><!-- #content -->
-		</section><!-- #primary -->
+				</div><!-- .intro -->
+			</article><!-- #post-<?php the_ID(); ?> -->
+		</section><!--#intro-->
+		
+		<div id="container" class="clearfix">
+			<div id="primary">
+				<div id="content">
+					<?php get_template_part( 'loop', 'archive' ); ?>
+	
+				</div><!-- #content -->
+			</div><!-- #primary -->
 
 <?php get_sidebar(); ?>
+		</div><!--#container-->
 <?php get_footer(); ?>

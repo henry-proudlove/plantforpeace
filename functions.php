@@ -225,7 +225,20 @@ function async_google_analytics() { ?>
  */
 
 function p4p_excerpt_length($length) {
-	return 20;
+	$type = get_post_type();
+	switch ($type){
+		case 'post':
+			return 50;
+			break;
+		case 'timeline':
+			return 10;
+			break;
+		case 'press_rels':
+			return 13;
+			break;
+		default:
+			return 20;
+	}
 }
 
 add_filter('excerpt_length', 'p4p_excerpt_length');
@@ -235,6 +248,25 @@ function p4p_excerpt_more($more) {
 	return '...';
 }
 add_filter('excerpt_more', 'p4p_excerpt_more');
+
+/*
+ *
+ * CUSTOM DATE
+ *
+ */
+ 
+function p4p_post_date() {
+    global $post;
+    if(get_post_type() == 'timeline'){
+		$d = 'F Y'; 
+		$the_date = mysql2date($d, $post->post_date);
+	}else{
+		$d = 'jS F Y'; 
+		$the_date = mysql2date($d, $post->post_date);
+	}
+	return $the_date;
+}
+add_filter('get_the_date', 'p4p_post_date');
 
 /*
  *
@@ -601,8 +633,8 @@ add_image_size( 'timeline', 430, 200, true );
 update_option('medium_size_w', 750);
 update_option('medium_size_w', 490);
 
-update_option('thumbnail_size_w', 80);
-update_option('thumbnail_size_h', 80);
+update_option('thumbnail_size_w', 78);
+update_option('thumbnail_size_h', 78);
 update_option('thumbnail_crop', 1);
 
 
@@ -836,7 +868,7 @@ function page_sections($where = false){
 		$type = pagefinder() . '_secs';
 	}
 		
-	echo '<section id="chapters" class="centered">';
+	echo '<section id="chapters" class="centered clearfix">';
 	$args = array('post_type' => $type, 'posts_per_page' => '-1');
 		$wp_query = new WP_Query($args);
 		
@@ -881,7 +913,7 @@ function get_press_releases(){
 					?>
 				</div><!-- .entry-meta -->
 				
-				<h3 class="entry-title"><?php the_title(); ?></h3>
+				<h1 class="entry-title"><?php the_title(); ?></h1>
 				
 			</header><!-- .entry-header -->
 
@@ -905,8 +937,10 @@ function thumbs_gallery($identifier){
 	$gallery = get_page_by_title($identifier);
 	$gallery = $gallery->ID;
 	echo '<a href="' . get_permalink($gallery) . '" id="image-gallery">';
+	echo '<div id="images" class="clearfix">';
 	echo img_fecther('thumbnail','12', $gallery);
-	the_clickthrough();
+	echo '</div><!--#images-->';
+	the_clickthrough('View all');
 	echo '</a><!--#image-gallery-->';
 	
 }

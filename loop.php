@@ -11,7 +11,7 @@
 <?php /* Start the Loop */ ?>
 <?php while ( have_posts() ) : the_post(); ?>
 
-	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> role="article">
+	<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?> role="article">
 		<header class="entry-header">
 			<div class="entry-meta">
 				<?php
@@ -29,8 +29,8 @@
 		<div class="entry-summary">
 			<?php the_excerpt(); ?>
 		</div><!-- .entry-summary -->
-		<a href="<?php the_permalink(); ?>" class="arrow-link" title="<?php printf( esc_attr__( 'Permalink to %s', 'themename' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark">Read more</a>
 		<footer class="entry-meta">
+			<a href="<?php the_permalink(); ?>" class="arrow-link" title="<?php printf( esc_attr__( 'Permalink to %s', 'themename' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark">Read more</a>
 			<span class="cat-links"><span class="entry-utility-prep entry-utility-prep-cat-links"><?php _e( 'Posted in ', 'themename' ); ?></span><?php the_category( ', ' ); ?></span>
 		</footer><!-- #entry-meta -->
 	</article><!-- #post-<?php the_ID(); ?> -->
@@ -42,8 +42,8 @@
 <?php /* Display navigation to next/previous pages when applicable */ ?>
 <?php if (  $wp_query->max_num_pages > 1 ) : ?>
 	<nav id="nav-below" role="article">
-		<h1 class="section-heading"><?php _e( 'Post navigation', 'themename' ); ?></h1>
-		<div class="nav-previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'themename' ) ); ?></div>
-		<div class="nav-next"><?php previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', 'themename' ) ); ?></div>
+		<h1 class="section-heading visuallyhidden"><?php _e( 'Post navigation', 'themename' ); ?></h1>
+		<div class="nav-previous"><?php next_posts_link( __( 'Older posts', 'themename' ) ); ?></div>
+		<div class="nav-next button"><?php previous_posts_link( __( 'Newer posts', 'themename' ) ); ?></div>
 	</nav><!-- #nav-below -->
 <?php endif; ?>

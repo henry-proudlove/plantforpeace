@@ -60,7 +60,7 @@ p {
 	-webkit-margin-end: 0px;
 	padding: 5px 0;
 	line-height: 1.3em;
-	color: #62605C;
+	color: #686661;
 }
 
 /*
@@ -229,11 +229,6 @@ button {width: auto; overflow: visible;}
 }
 #content {
 	/*margin: 0 280px 0 0;*/
-}
-#main .widget-area {
-	float: right;
-	overflow: hidden;
-	width: 220px;
 }
 #colophon {
 	clear: both;
@@ -538,12 +533,16 @@ h2,
 h3,
 time,
 #access a,
-.arrow-link, 
+.arrow-link,
+.nav-previous,
+.nav-next,
 .page-intro .entry-content > p, 
 .page-intro .entry-content .left, 
-.entry-content > p:first-child,
+.pg-intro .entry-content > p:first-child,
+.single .entry-content > p:first-child,
 .centered .text p:first-child,
-a.button
+a.button,
+.cat-item
 {
 	font-family: Trade Gothic, arial, sans-serif;
 	text-transform: uppercase;
@@ -553,7 +552,10 @@ h1,
 h2,
 h3,
 time,
-.arrow-link
+.arrow-link,
+.nav-previous,
+.nav-next,
+.cat-item
 {
 	line-height: 1em;
 }
@@ -596,7 +598,12 @@ h3{
 	font-size: 1.3em;
 }
 
-.arrow-link, time{
+.arrow-link,
+.nav-previous,
+.nav-next,
+time,
+.cat-item
+{
 	font-size: 0.9em;
 	
 }
@@ -607,15 +614,35 @@ h3{
 	margin: 12px 25px;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-	width: 150px;
 	overflow: hidden;
+}
+
+.profiles .arrow-link{
+	width: 150px;
+}
+
+#promos .arrow-link{
+	width: 250px;
+}
+
+#primary .arrow-link{
+	width: 110px;
+}
+
+#secondary .arrow-link{
+	width: 255px;
 }
 
 time{
 	display: block;
 	margin-bottom: 5px;
-	color: rgba(89, 86, 81, 0.9)!important;
+	color: #a6a197;
 }
+
+.cat-item a{
+	color: #a6a197;
+}
+
 /*
  *
  * STRUCTURE
@@ -762,6 +789,20 @@ img{
 	text-overflow: ellipsis;
 }
 
+/*.nav-previous a, nav-next a{
+	padding: 0 0 0 15px;
+	color: #A6A197;
+	display: block;
+}
+
+.nav-next a{
+	background: #fcfbfa url('images/arrow-link-grey.svg') no-repeat left center;
+}
+
+.nav-previous a{
+	background: #fcfbfa url('images/arrow-link-grey-back.svg') no-repeat left center;
+}*/
+
 #promos > .box-link{
 	width: 318px;
 }
@@ -796,6 +837,8 @@ img{
 .arrow-link{
 	display:block;
 }
+
+
  
 .box-link > *{
 	text-decoration: none;
@@ -861,6 +904,7 @@ section#intro{
 	width: 590px;
 	margin: 0 auto;
 	padding: 25px 0 80px;
+	clear: both;
 }
 
 .centered h1, .centered h2, .centered h3{
@@ -963,6 +1007,7 @@ section#intro{
 h3.breadcrumb{
 	margin: 0;
 	padding: 0 0 2px;
+	color: #A6A197;
 }
 
 h3.breadcrumb a{
@@ -1080,8 +1125,7 @@ section#get-involved p{
 	padding-top: 0;
 }
 
-
-a.button{
+a.button, .nav-previous a, .nav-next a{
 	display: inline-block;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -1091,8 +1135,28 @@ a.button{
 	margin-bottom: 22px;
 	color: #595752;
 	background-color: #F0EDE6;
+	background-repeat: no-repeat;
 	font-size: 1.2em;
 }
+
+.nav-previous a, .nav-next a{
+	font-size:1em;
+	padding: 10px 25px;
+	color: #7f7c77;
+}
+
+.nav-previous a{
+	background-image: url('images/arrow-link-grey-back.svg');
+	background-position: 15px 11px;
+	padding-left: 35px;
+}
+
+.nav-next a{
+	background-image: url('images/arrow-link-grey.svg');
+	background-position: 118px 11px;
+	padding-right: 35px;
+}
+
 
 .button.red{
 	background: #ce2129;
@@ -1101,7 +1165,6 @@ a.button{
 
 .button.facebook{
 	background-image: url('images/ico-fb.svg');
-	background-repeat: no-repeat;
 	background-position: 19px 8px;
 	padding-left: 55px;
 	background-color: #4c70a9;
@@ -1110,7 +1173,6 @@ a.button{
 
 .button.twitter{
 	background-image: url('images/ico-tw.svg');
-	background-repeat: no-repeat;
 	background-position: 15px 11px;
 	padding-left: 55px;
 	background-color: #24aae1;
@@ -1119,7 +1181,6 @@ a.button{
 
 .button.newsletter{
 	background-image: url('images/ico-mail.svg');
-	background-repeat: no-repeat;
 	background-position: 14px 12px;
 	padding-left: 55px;
 }
@@ -1143,6 +1204,332 @@ section#get-involved .contact-form form textarea{
 section#get-involved .contact-form form input[type='text']{
 	width: 230px;
 }
+
+/*
+ *
+ * MEDIA SECTION
+ *
+ */
+
+#container{
+	padding: 25px 0 50px 25px;
+	position: relative;
+	background: url('images/split-body-bg.png') repeat-y 640px top;
+}
+
+#primary{
+	width: 590px;
+	padding-right: 25px;
+	border-right: 2px solid #F8F7F4;
+	height: 100%;
+}
+
+#secondary{
+	width: 320px;
+	float: right;
+	margin-bottom: 50px;
+}
+
+#primary article{
+	margin-top: 30px;
+	padding-bottom: 30px;
+}
+
+#secondary aside{
+	margin-top: 30px;
+	padding-bottom: 30px;
+}
+
+#primary h1, #primary h2, #primary h3{
+	margin: 0;
+	padding: 0;
+}
+
+#primary time{
+	margin-bottom: 2px;
+}
+
+#primary .entry-title{
+	margin-bottom: 7px;
+}
+
+.entry-meta .cat-links{
+	font-family: 'Trade Gothic', arial, sans-serif;
+	line-height: 1em;
+	font-size: 0.9em;
+	text-transform: uppercase;
+}
+
+#primary .entry-meta .cat-links{
+	width: 465px;
+	float: left;
+	text-align: right;
+	padding-top: 2px;
+	color: #A6A197;
+}
+
+#primary .entry-meta .cat-links a{
+	color: #595751;
+}
+
+#primary .arrow-link{
+	margin: 0;
+	float: left;
+}
+
+#secondary .arrow-link{
+	margin: 0;
+}
+
+#primary img{
+	margin-bottom: 11px;
+}
+
+#primary .entry-summary{
+	margin-bottom: 5px;
+	padding: 0 0 6px;
+}
+
+h3.widget-title{
+	font-size: 0.9em;
+	text-align: right;
+	margin: 0;
+	padding: 0 25px 15px 0;
+}
+
+#secondary h1{
+	font-size: 0.9em;
+	margin: 0;
+}
+
+#secondary ul, ol{
+	margin-left: 0;
+	border-bottom: 2px solid #f8f7f4;
+}
+
+#secondary li{
+	list-style: none;
+	padding: 15px 25px;
+	border-top: 2px solid #f8f7f4;
+}
+
+#secondary time{
+	margin-bottom: 3px;
+}
+
+#secondary p{
+	font-size: 0.9em;
+	color: #94918B;
+	line-height: 1.15em;
+	padding-bottom: 6px;
+}
+
+.thumb-gallery img{
+	float: left;
+	border-left: 2px solid #f8f7f4;
+	border-bottom: 2px solid #f8f7f4;
+}
+
+#secondary .thumb-gallery .arrow-link, #secondary #latest-videos > .arrow-link{
+	margin: 12px 25px;
+	float: right;
+	width: auto;
+}
+
+#secondary .videos li{
+	padding: 0;
+}
+
+#secondary .videos li img{
+	max-width: none;
+	margin-left: -10px;
+}
+
+#secondary .videos li .info{
+	width: 190px;
+	display: block;
+	float: left;
+	padding-left: 25px;
+	padding-top: 24px;
+}
+
+#secondary .videos .img-holder{
+	width: 78px;
+	height: 75px;
+	display: block;
+	float: left;
+	overflow: hidden;
+	margin-left: 2px;
+}
+
+.video {
+	display: block;
+}
+
+#secondary .video h1{
+	margin-bottom: 2px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	color: #A6A197;
+}
+
+#archiveform{
+	padding: 0 25px;
+}
+
+#archiveform select{
+	width: 270px;
+}
+
+#primary h1 a{
+	color: #595751;
+}
+
+/*
+ *
+ * COLORBOX
+ *
+ */
+ 
+/*
+    ColorBox Core Style
+    The following rules are the styles that are consistant between themes.
+    Avoid changing this area to maintain compatability with future versions of ColorBox.
+*/
+#colorbox, #cboxOverlay, #cboxWrapper{position:absolute; top:0; left:0; z-index:9999; overflow:hidden;}
+#cboxOverlay{position:fixed; width:100%; height:100%;}
+#cboxMiddleLeft, #cboxBottomLeft{clear:left;}
+#cboxContent{position:relative; overflow:hidden;}
+#cboxLoadedContent{overflow:auto;}
+#cboxLoadedContent iframe{display:block; border:0;}
+#cboxTitle{margin:0;}
+#cboxLoadingOverlay, #cboxLoadingGraphic{position:absolute; top:0; left:0; width:100%;}
+#cboxPrevious, #cboxNext, #cboxClose, #cboxSlideshow{cursor:pointer;}
+
+/* 
+    Example user style
+    The following rules are ordered and tabbed in a way that represents the
+    order/nesting of the generated HTML, so that the structure easier to understand.
+*/
+#cboxOverlay{background:url('images/colorbox-overlay.png') 0 0 repeat;}
+#colorbox{}
+    #cboxTopLeft{width:21px; height:21px; background:url(../css/controls.png) -100px 0 no-repeat;}
+    #cboxTopRight{width:21px; height:21px; background:url(../css/controls.png) -129px 0 no-repeat;}
+    #cboxBottomLeft{width:21px; height:21px; background:url(../css/controls.png) -100px -29px no-repeat;}
+    #cboxBottomRight{width:21px; height:21px; background:url(../css/controls.png) -129px -29px no-repeat;}
+    #cboxMiddleLeft{width:21px; background:url(../css/controls.png) left top repeat-y;}
+    #cboxMiddleRight{width:21px; background:url(../css/controls.png) right top repeat-y;}
+    #cboxTopCenter{height:21px; background:url(../css/border.png) 0 0 repeat-x;}
+    #cboxBottomCenter{height:21px; background:url(../css/border.png) 0 -29px repeat-x;}
+        #cboxLoadedContent{
+        	margin-bottom:28px;
+        	background: white;
+        }
+        #cboxTitle{position:absolute; bottom:4px; left:0; text-align:center; width:100%; color:#949494;}
+        #cboxCurrent{position:absolute; bottom:4px; left:58px; color:#949494;}
+        #cboxSlideshow{position:absolute; bottom:4px; right:30px; color:#0092ef;}
+        #cboxPrevious{position:absolute; bottom:0; left:0px; background:url(../css/controls.png) -75px 0px no-repeat; width:25px; height:25px; text-indent:-9999px;}
+        #cboxPrevious.hover{background-position:-75px -25px;}
+        #cboxNext{position:absolute; bottom:0; left:27px; background:url(../css/controls.png) -50px 0px no-repeat; width:25px; height:25px; text-indent:-9999px;}
+        #cboxNext.hover{background-position:-50px -25px;}
+        #cboxLoadingOverlay{background:url(images/loading_background.png) center center no-repeat;}
+        #cboxLoadingGraphic{background:url(images/loading.gif) center center no-repeat;}
+        #cboxClose{position:absolute; bottom:0; right:0; background:url(../css/controls.png) -25px 0px no-repeat; width:25px; height:25px; text-indent:-9999px;}
+        #cboxClose.hover{background-position:-25px -25px;}
+
+/*
+    The following fixes png-transparency for IE6.  
+    It is also necessary for png-transparency in IE7 & IE8 to avoid 'black halos' with the fade transition
+    
+    Since this method does not support CSS background-positioning, it is incompatible with CSS sprites.
+    Colorbox preloads navigation hover classes to account for this.
+    
+    !! Important Note: AlphaImageLoader src paths are relative to the HTML document,
+    while regular CSS background images are relative to the CSS document.
+*/
+.cboxIE #cboxTopLeft{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=internet_explorer/borderTopLeft.png, sizingMethod='scale');}
+.cboxIE #cboxTopCenter{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=internet_explorer/borderTopCenter.png, sizingMethod='scale');}
+.cboxIE #cboxTopRight{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=internet_explorer/borderTopRight.png, sizingMethod='scale');}
+.cboxIE #cboxBottomLeft{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=internet_explorer/borderBottomLeft.png, sizingMethod='scale');}
+.cboxIE #cboxBottomCenter{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=internet_explorer/borderBottomCenter.png, sizingMethod='scale');}
+.cboxIE #cboxBottomRight{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=internet_explorer/borderBottomRight.png, sizingMethod='scale');}
+.cboxIE #cboxMiddleLeft{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=internet_explorer/borderMiddleLeft.png, sizingMethod='scale');}
+.cboxIE #cboxMiddleRight{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=internet_explorer/borderMiddleRight.png, sizingMethod='scale');}
+
+
+#cboxContent, #colorbox{
+	overflow: visible;
+}
+
+#colorbox div{
+	overflow: visible;	
+}
+#cboxLoadedContent h1{
+	font-size: 2em;
+	margin: 0;
+	padding: 0;
+}
+
+#cboxLoadedContent time{
+	margin-bottom: 0;
+}
+
+#cboxLoadedContent .timeline-content{
+	padding: 18px 25px 25px;
+}
+
+#cboxLoadedContent .entry-content p{
+	line-height: 1.3em;
+}
+
+#cboxLoadedContent .entry-meta{
+	margin-bottom: 3px;
+}
+
+#cboxLoadedContent .entry-header{
+	margin-bottom: 10px;
+}
+
+#cboxNext, #cboxPrevious{
+	width: 30px;
+	height: 56px;
+	background-repeat: no-repeat;
+	background-position: center center;
+	position: absolute;
+	top: 50%;
+}
+
+#cboxNext{
+	background-image: url('images/overlay-nav-right.svg');
+	left: auto;
+	right: -45px;
+}
+
+#cboxPrevious{
+	background-image: url('images/overlay-nav-left.svg');
+	left: -45px
+}
+
+#cboxCurrent{
+	display: none !important;
+}
+
+#cboxClose{
+	background-image: url('images/overlay-close.svg');
+	width: 30px;
+	height: 30px;
+	background-repeat: no-repeat;
+	background-position: center center;
+	position: absolute;
+	top:-45px;
+	right: -45px;
+}
+
+#cboxLoadingOverlay{
+	display: block !important;
+}
+
 
 
 

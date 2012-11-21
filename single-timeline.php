@@ -16,7 +16,7 @@ get_header(); ?>
 					<?php 
 						$meta = get_post_meta(get_the_id(), '_timeline_meta', true);
 						if($meta['image-video'] == 'video'){
-							echo wp_oembed_get($meta['video_url'], array('width'=>520, 'height'=> 430));
+							echo wp_oembed_get($meta['video_url'], array('width'=>640, 'height'=> 430));
 						}else{
 							img_fecther($size='overlay', $limit=1);
 						}
@@ -39,10 +39,6 @@ get_header(); ?>
 						<div class="entry-content">
 							<?php the_content(); ?>
 						</div><!-- .entry-content -->
-	
-						<footer class="entry-meta">
-							<span class="cat-links"><span class="entry-utility-prep entry-utility-prep-cat-links"><?php _e( 'Posted in ', 'themename' ); ?></span><?php the_category( ', ' ); ?></span>
-						</footer><!-- #entry-meta -->
 					</div><!--.timeline-content-->
 				</article><!-- #post-<?php the_ID(); ?> -->
 

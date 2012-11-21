@@ -6,30 +6,41 @@
 ?>
 		<div id="secondary" class="widget-area">
 		
-				<aside id="press-releases" class="widget" role="complementary">
+				<aside id="press-releases" class="widget clearfix" role="complementary">
 					<h3 class="widget-title">Press Releases</h3>
 					<?php get_press_releases(); ?>
 				</aside><!--#press-releases-->
 				
-				<aside id="image-gallery" class="widget thumb-gallery" role="complementary">
-					<h3 class="widget-title">Images</h3>
+				<aside id="image-gallery" class="widget thumb-gallery clearfix" role="complementary">
+					<h3 class="widget-title">Image Gallery</h3>
 					<?php thumbs_gallery('Image Gallery'); ?>
 				</aside><!--#image-gallery-->
 
-				<aside id="latest-videos" class="widget" role="complementary">
+				<aside id="latest-videos" class="widget clearfix" role="complementary">
+					<h3 class="widget-title">Videos</h3>
 					<div id="thumbs">
-						<ul class="img-list clearfix"></ul>
+						<ul class="videos clearfix"></ul>
 					</div>
 				</aside><!--#latest-videos-->
 				
-				<aside id="brand-assets" class="widget thumb-gallery" role="complementary">
+				<aside id="brand-assets" class="widget thumb-gallery clearfix" role="complementary">
 					<h3 class="widget-title">Brand Assets</h3>
 					<?php thumbs_gallery('Brand Assets'); ?>
 				</aside><!--#brand-assets-->
 				
-				<aside id="categories" class="widget" role="complementary">
+				<aside id="categories" class="widget clearfix" role="complementary">
 					<h3 class="widget-title">Categories</h3>
-					<?php wp_list_categories('title_li='); ?>
+					<ul>
+						<?php
+						$args = array(
+							'orderby'            => 'count',
+							'hierarchical'       => 0,
+							'title_li'           => '',
+							'show_option_none'   => '',
+							'number'             => 15
+						);
+						wp_list_categories($args); ?>
+					</ul>
 				</aside><!--#categories-->
 
 				<form id="archiveform" action="">

@@ -11,10 +11,8 @@ get_header();
 		the_post();
 		pg_header(); ?>
 
-		<div id="primary">
-			<div id="content">
-				<?php page_sections(true); ?>
-			</div><!-- #content -->
-		</div><!-- #primary -->
+		<div id="content">
+			<?php page_sections(true); ?>
+		</div><!-- #content -->
 
 <?php get_footer(); ?>

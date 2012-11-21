@@ -11,10 +11,8 @@ get_header();
 		the_post();
 		pg_header();
 		?>
-		<div id="primary">
-			<div id="content">
-				<?php threecol_promos('howwework_promo'); ?>
-			</div><!-- #content -->
-		</div><!-- #primary -->
+		<div id="content">
+			<?php threecol_promos('howwework_promo'); ?>
+		</div><!-- #content -->
 
 <?php get_footer(); ?>
