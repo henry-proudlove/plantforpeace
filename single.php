@@ -9,7 +9,7 @@ get_header(); ?>
 				<article role="article">
 					<div id="carousel"></div>
 					<div class="page-intro">
-						<h1 class="entry-title">Media</h1>
+						<h1 class="entry-title">News</h1>
 					</div><!-- .intro -->
 				</article>
 			</section><!--#intro-->
@@ -30,7 +30,11 @@ get_header(); ?>
 							?>
 						</div><!-- .entry-meta -->
 						<h1 class="entry-title"><?php the_title(); ?></h1>
-						<?php img_fecther($size='news_header', $limit=1); ?>
+						<?php
+							if(has_post_thumbnail()){
+								the_post_thumbnail('news-header');
+							}	
+						?>
 					</header><!-- .entry-header -->
 
 					<div class="entry-content">

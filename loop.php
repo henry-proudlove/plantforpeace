@@ -23,7 +23,11 @@
 				?>
 			</div><!-- .entry-meta -->
 			<h1 class="entry-title"><a href="<?php echo get_permalink(). '#content' ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'themename' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
-			<?php img_fecther($size='news_header', $limit=1); ?>
+			<?php
+				if(has_post_thumbnail()){
+					the_post_thumbnail('news-header');
+				}	
+			?>
 		</header><!-- .entry-header -->
 
 		<div class="entry-summary">

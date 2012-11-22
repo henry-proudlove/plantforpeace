@@ -26,7 +26,9 @@ get_header();
 		Galleria.loadTheme('<?php echo get_template_directory_uri(); ?>/js/galleria.classic.min.js');
 	
 		//Initialize Galleria
-		Galleria.run('#galleria');
+		Galleria.run('#galleria', {
+			width : 960
+		});
 	
 		</script>
 

@@ -144,8 +144,8 @@ input:invalid, textarea:invalid {
 /* These selection declarations have to be separate.
    No text-shadow: twitter.com/miketaylr/status/12228805301 
    Also: hot pink. */
-::-moz-selection{ background: #FF5E99; color:#fff; text-shadow: none; }
-::selection { background:#FF5E99; color:#fff; text-shadow: none; } 
+::-moz-selection{ background: #595751; color:#fff; text-shadow: none; }
+::selection { background:#595751; color:#fff; text-shadow: none; } 
 /*  j.mp/webkit-tap-highlight-color */
 a:link { -webkit-tap-highlight-color: #FF5E99; } 
 /* make buttons play nice in IE:    
@@ -286,7 +286,14 @@ button {width: auto; overflow: visible;}
  *
  */
  
- 
+#access * {
+	-webkit-transition: none !important;
+	-moz-transition: none !important;
+	-ms-transition: none !important;
+	-o-transition: none !important;
+	transition: none !important;
+}
+
 #access {
 	display: block;
 	float: left;
@@ -308,7 +315,6 @@ button {width: auto; overflow: visible;}
 }
 
 #access ul ul{
-	display:block;
 	background: #f8f6f2 url('images/access-border.png') top left;
 }
 
@@ -323,10 +329,14 @@ button {width: auto; overflow: visible;}
 #access ul ul {
 	display: none;
 	position: absolute;
+	opacity:0;
+	filter:Alpha(opacity=0);
 	top: 2em;
 	left: 0;
-	z-index: 99999;
+	z-index: 0;
 	white-space: nowrap;
+	overflow: hidden;
+	height: 0;
 }
 #access ul ul ul {
 	left: 100%;
@@ -347,6 +357,9 @@ button {width: auto; overflow: visible;}
 	border-bottom: none;
 }
 
+#access ul, #access li, #access a, #access ul ul{
+}
+
 #access .menu > li:hover {
 	background: #d71f2c;
 }
@@ -357,6 +370,10 @@ button {width: auto; overflow: visible;}
 
 #access ul li:hover > ul {
 	display: block;
+	opacity:1;
+	filter:Alpha(opacity=100);
+	z-index: 9999;
+	height: auto;
 }
 
 
@@ -642,7 +659,7 @@ time,
 }
 
 .profiles .arrow-link{
-	width: 150px;
+	width: 125px;
 }
 
 #promos .arrow-link{
@@ -781,6 +798,14 @@ img{
 	-o-transition: all 0.3s ;
 }
 
+span.arrow-link, a.arrow-link {
+	transition: all 0.2s linear;
+	-webkit-transition: all 0.2s linear;
+	-moz-transition: all 0.2s linear;
+	-ms-transition: all 0.2s linear;
+	-o-transition: all 0.2s linear;
+}
+
 .box-link:hover{
 	/*background: #F4F1ED;*/
 }
@@ -788,15 +813,15 @@ img{
 
 
 .box-link:hover .image-holder{
-	filter:Alpha(opacity=80);
-	opacity: 0.8;
+	filter:Alpha(opacity=60);
+	opacity: 0.6;
 }
 
 .box-link:hover h3{
 	color: #CD2029;
 }
 
-.box-link:hover .arrow-link{
+.box-link:hover .arrow-link, a.arrow-link:hover{
 	color: #940a1a;
 	background-position: 3px center; 
 }
@@ -819,15 +844,40 @@ img{
 	border-color: #f6f3f0;
 }
 
-#promos .image-holder{
+.box-link .tint{
+	position: relative;
+	background: #A6A197;
+}
+
+#promos .tint{
+	height: 193px;
+}
+
+.profiles .tint{
+	height: 193px;
+}
+
+#timeline .tint{
+	height: 200px;
+}
+
+.box-link .image-holder{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background-position: top left;
 	background-repeat: no-repeat;
-	height: 210px;
+}
+
+/*#promos .image-holder{
+	background-repeat: no-repeat;
 }
 
 .profiles .image-holder{
 	background-repeat: no-repeat;
-	height: 193px;
-}
+}*/
 
 #promos > .box-link.right, .profiles > .box-link.right {
 	border-width: 0 0 0 1px;
@@ -1082,7 +1132,7 @@ h3.breadcrumb a{
 	background: url('images/header-bg.svg') no-repeat top center;
 	position: absolute;
 	width: 960px;
-	z-index: 5;
+	z-index: 50;
 	height: 172px; 
 }
 
@@ -1101,15 +1151,20 @@ h3.breadcrumb a{
 }
 
 #get-involved-nav{
-	background: url('images/get-involved-circ.svg') no-repeat top center;
+	background: url('images/get-involved-circ.svg') no-repeat bottom left;
 	display: block;
 	float: right;
-	width: 104px;
-	height: 95px;
+	width: 98px;
+	height: 80px;
 	color: white;
 	font-family: 'Trade Gothic' , arial, sans-serif;
 	text-transform: uppercase;
 	padding-top: 16px;
+}
+
+#get-involved-nav:hover{
+	width: 104px;
+	height: 80px;
 }
 
 #get-involved-nav div{
@@ -1118,6 +1173,24 @@ h3.breadcrumb a{
 	-moz-transform:rotate(18deg); /* Firefox */
 	-webkit-transform:rotate(18deg); /* Safari and Chrome */
 	-o-transform:rotate(18deg); /* Opera */
+	/* Firefox */
+	-moz-transition: all 0.2s ease;
+	/* WebKit */
+	-webkit-transition: all 0.2s ease;
+	/* Opera */
+	-o-transition: all 0.2s ease;
+	/* Standard */
+	transition: all 0.2s ease;
+	-webkit-font-smoothing: antialiased;
+	
+}
+
+#get-involved-nav:hover div{
+	transform:rotate(6deg);
+	-ms-transform:rotate(6deg); /* IE 9 */
+	-moz-transform:rotate(6deg); /* Firefox */
+	-webkit-transform:rotate(6deg); /* Safari and Chrome */
+	-o-transform:rotate(6deg); /* Opera */
 }
 
 #get-involved-nav span{
@@ -1131,7 +1204,7 @@ h3.breadcrumb a{
 }
 
 #get-involved-nav #involved{
-	font-size: 1.5em;
+	font-size: 1.45em;
 	line-height: 1em;
 }
 
@@ -1259,7 +1332,7 @@ section#get-involved .contact-form form input[type='text']{
 
 /*
  *
- * MEDIA SECTION
+ * NEWS SECTION
  *
  */
 
@@ -1457,6 +1530,10 @@ h3.widget-title{
 	text-indent: -9000px;
 }
 
+#primary h1 a:hover{
+	color: #CD2029;
+}
+
 /*
  *
  * COLORBOX
@@ -1566,7 +1643,13 @@ h3.widget-title{
 	margin-bottom: 10px;
 }
 
-#cboxNext, #cboxPrevious, .single .nav-next a, .single .nav-previous a{
+#cboxNext,
+#cboxPrevious,
+.single .nav-next a,
+.single .nav-previous a,
+.galleria-image-nav-right,
+.galleria-image-nav-left
+{
 	width: 30px;
 	height: 56px;
 	background-repeat: no-repeat;
@@ -1578,7 +1661,10 @@ h3.widget-title{
 	overflow: hidden;
 }
 
-#cboxNext, .single .nav-next a{
+#cboxNext,
+.single .nav-next a,
+.galleria-image-nav-right
+{
 	background-image: url('images/overlay-nav-right.svg');
 	left: auto;
 }
@@ -1591,14 +1677,41 @@ h3.widget-title{
 	right: -90px;
 }
 
-#cboxPrevious, .single .nav-previous a{
+#cboxPrevious,
+.single .nav-previous a,
+.galleria-image-nav-left
+{
 	background-image: url('images/overlay-nav-left.svg');
 	right: auto;
+}
+
+.galleria-image-nav-right{
+	right:50px !important;
+}
+
+.galleria-image-nav-left{
+	left:50px !important;
 }
 
 #cboxPrevious{
 	left: -45px;
 }
+
+#cboxPrevious, #cboxClose, #cboxNext{
+	opacity: 0.6;
+	filter:Alpha(opacity=60);
+	-webkit-transition: all 0.2s ;
+	-moz-transition: all 0.2s ;
+	-ms-transition: all 0.2s ;
+	-o-transition: all 0.2s ;
+	transition: all 0.2s ;
+	
+}
+
+#cboxPrevious:hover, #cboxClose:hover, #cboxNext:hover{
+	opacity: 1;
+	filter:Alpha(opacity=100);
+} 
 
 .single .nav-previous a{
 	left: -90px;
@@ -1634,6 +1747,22 @@ h3.widget-title{
 	font-size: 1.8em;
 	padding: 3px 0 0;
 }
+
+.page-template-page-gallery-php #content{
+	padding: 25px 0;
+}
+
+.single .entry-content a:hover{
+	text-decoration: underline;
+}
+
+#cboxMiddleRight, #cboxMiddleLeft{
+	width: 80px;
+}
+
+#cboxTopLeft{
+	width: 50px;
+	height: 50px;
 }
 
 

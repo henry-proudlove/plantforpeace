@@ -318,7 +318,7 @@ add_filter('get_the_date', 'p4p_post_date');
 					'menu_order' => 7
 				),
 				array(
-					'page_title' => 'Media',
+					'page_title' => 'News',
 					'page_template' => 'page-news.php',
 					'menu_order' => 8
 				),
@@ -640,8 +640,11 @@ add_image_size( 'news_body', 295, 295, true );
 add_image_size( 'timeline', 430, 200, true );
 
 
-update_option('medium_size_w', 750);
-update_option('medium_size_w', 490);
+update_option('medium_size_w', 590);
+update_option('medium_size_h', 590);
+
+update_option('large_size_w', 2048);
+update_option('large_size_h', 2048);
 
 update_option('thumbnail_size_w', 78);
 update_option('thumbnail_size_h', 78);
@@ -769,7 +772,7 @@ function pg_header(){
 			echo '<div id="carousel"><div id="header-images">';
 			
 			if(is_page_template('page-whatwedo.php')){?>
-				<a href="#" rel="bookmark"><?php img_fecther('header' , 1) ?></a> <?php
+				<a href="#" class="video" rel="bookmark"><?php img_fecther('header' , 1) ?></a> <?php
 			}else if(is_page_template('page-gallery.php')){
 			}else if(is_page_template('page-gallery.php')){
 			}else{
@@ -804,7 +807,7 @@ function the_timeline_exceprt(){
 	<a href="<?php echo get_permalink() . '#post-' . get_the_ID(); ?>" id="post-<?php the_ID(); ?>" <?php post_class('lightbox box-link'); ?> rel="bookmark">
 
 		<time><?php the_date('F Y');?></time>
-		<?php img_fecther('timeline'); ?>
+		<div class="tint"><div class="image-holder" style="background-image: url('<?php bg_img_fecther('timeline'); ?>');"></div></div>
 		<div class="intro">
 			<h3 class="entry-title"><?php the_title(); ?></h3>
 			<div class="entry-summary">

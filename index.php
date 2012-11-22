@@ -9,7 +9,7 @@ get_header(); ?>
 			<article role="article">
 				<div id="carousel"></div>
 				<div class="page-intro">
-					<h1 class="entry-title">Media</h1>
+					<h1 class="entry-title">News</h1>
 				</div><!-- .intro -->
 			</article>
 		</section><!--#intro-->
