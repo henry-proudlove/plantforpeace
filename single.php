@@ -5,9 +5,15 @@
  */
 
 get_header(); ?>
-
-		<div id="primary">
-			<div id="content">
+			<section id="intro">
+				<article role="article">
+					<div id="carousel"></div>
+					<div class="page-intro">
+						<h1 class="entry-title">Media</h1>
+					</div><!-- .intro -->
+				</article>
+			</section><!--#intro-->
+			<div id="content" class="centered">
 
 			<?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
@@ -23,7 +29,7 @@ get_header(); ?>
 								);
 							?>
 						</div><!-- .entry-meta -->
-						<h1 class="entry-title"><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'themename' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
+						<h1 class="entry-title"><?php the_title(); ?></h1>
 						<?php img_fecther($size='news_header', $limit=1); ?>
 					</header><!-- .entry-header -->
 
@@ -38,14 +44,13 @@ get_header(); ?>
 				</article><!-- #post-<?php the_ID(); ?> -->
 
 				<nav id="nav-below" role="article">
-					<h1 class="section-heading"><?php _e( 'Post navigation', 'themename' ); ?></h1>
-					<div class="nav-previous"><?php previous_post_link( '%link', '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'themename' ) . '</span> %title' ); ?></div>
-					<div class="nav-next"><?php next_post_link( '%link', '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'themename' ) . '</span>' ); ?></div>
+					<h1 class="section-heading visuallyhidden"><?php _e( 'Post navigation', 'themename' ); ?></h1>
+					<div class="nav-previous"><a href="<?php echo get_permalink(get_adjacent_post(false,'',false)) . '#content'; ?>" rel="bookmark"></a></div>
+					<div class="nav-next"><a href="<?php echo get_permalink(get_adjacent_post(false,'',true)) . '#content'; ?>" rel="bookmark"></a></div>
 				</nav><!-- #nav-below -->
 
-			<?php endwhile; // end of the loop. ?>
+			<?php endwhile; ?>
 
 			</div><!-- #content -->
-		</div><!-- #primary -->
 
 <?php get_footer(); ?>

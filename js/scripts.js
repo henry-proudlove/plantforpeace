@@ -25,16 +25,34 @@ $(document).ready(function() {
 	$('#header-images').cycleInit();
 	$(".page-intro .entry-content p").introHeight();
 	
-	$('a.lightbox').each(function(){
+	$('#timeline a.lightbox').each(function(){
 		if ($(this).attr("href").indexOf('#') !== -1) {
 			$(this).colorbox({
 				'href': $(this).attr("href").replace('#', ' #'),
-				'innerWidth' : 640
+				'innerWidth' : 640,
+				'initialWidth' : 640,
+				'initialHeight' : 640,  
+				'returnFocus' : false
 			});
 		} else {
 			$(this).colorbox();
 		}
 	});
+	
+	$('.profiles a.lightbox').each(function(){
+		if ($(this).attr("href").indexOf('#') !== -1) {
+			$(this).colorbox({
+				'href': $(this).attr("href").replace('#', ' #'),
+				'innerWidth' : 430,
+				'initialWidth' : 430,
+				'initialHeight' : 430,
+				'returnFocus' : false
+			});
+		} else {
+			$(this).colorbox();
+		}
+	});
+	
 });
 
 function setupGallery(videos) {

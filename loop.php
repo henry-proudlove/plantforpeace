@@ -22,7 +22,7 @@
 					);
 				?>
 			</div><!-- .entry-meta -->
-			<h1 class="entry-title"><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'themename' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
+			<h1 class="entry-title"><a href="<?php echo get_permalink(). '#content' ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'themename' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
 			<?php img_fecther($size='news_header', $limit=1); ?>
 		</header><!-- .entry-header -->
 
@@ -30,7 +30,7 @@
 			<?php the_excerpt(); ?>
 		</div><!-- .entry-summary -->
 		<footer class="entry-meta">
-			<a href="<?php the_permalink(); ?>" class="arrow-link" title="<?php printf( esc_attr__( 'Permalink to %s', 'themename' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark">Read more</a>
+			<a href="<?php echo get_permalink() . '#content'; ?>" class="arrow-link" title="<?php printf( esc_attr__( 'Permalink to %s', 'themename' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark">Read more</a>
 			<span class="cat-links"><span class="entry-utility-prep entry-utility-prep-cat-links"><?php _e( 'Posted in ', 'themename' ); ?></span><?php the_category( ', ' ); ?></span>
 		</footer><!-- #entry-meta -->
 	</article><!-- #post-<?php the_ID(); ?> -->

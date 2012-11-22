@@ -6,12 +6,12 @@
 
 get_header(); ?>
 		<section id="intro">
-			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> role="article">
+			<article role="article">
 				<div id="carousel"></div>
 				<div class="page-intro">
 					<h1 class="entry-title">Media</h1>
 				</div><!-- .intro -->
-			</article><!-- #post-<?php the_ID(); ?> -->
+			</article>
 		</section><!--#intro-->
 		<div id="container" class="clearfix">
 			<div id="primary">

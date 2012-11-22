@@ -633,8 +633,8 @@ add_image_size( 'carousel', 960, 440, true );
 add_image_size( 'header', 960, 360, true );
 add_image_size( 'promo', 320, 210, true );
 add_image_size( 'profile', 193, 193, true );
-add_image_size( 'overlay', 640, 430, true );
-add_image_size( 'overlay_person', 520, 520, true );
+add_image_size( 'overlay', 640, 300, true );
+add_image_size( 'overlay_person', 430, 350, true );
 add_image_size( 'news_lead', 590, 300, true );
 add_image_size( 'news_body', 295, 295, true );
 add_image_size( 'timeline', 430, 200, true );
@@ -748,7 +748,7 @@ function threecol_promos($type){
 				?>
 					<a href="<?php echo $meta['link_url'] ?>" id="post-<?php the_ID(); ?>" <?php post_class($class . ' box-link'); ?> role="article" rel="bookmark">
 						<h3><? the_title(); ?></h3>
-						<div class="image-holder" style="background-image: url('<?php bg_img_fecther('promo'); ?>');"></div>
+						<div class="tint"><div class="image-holder" style="background-image: url('<?php bg_img_fecther('promo'); ?>');"></div></div>
 						<?php the_excerpt(); ?>
 						<?php the_clickthrough($meta['link_txt']); ?>
 					</a>
@@ -863,7 +863,7 @@ function profile_markup($class){
 	global $post ?>
 	
 	<a href="<?php echo get_permalink() . '#post-' . get_the_ID(); ?>" id="post-<?php the_ID(); ?>" <?php post_class($class . ' box-link lightbox'); ?> rel="bookmark">
-		<div class="image-holder" style="background-image: url('<?php bg_img_fecther('profile'); ?>');"></div>
+		<div class="tint"><div class="image-holder" style="background-image: url('<?php bg_img_fecther('profile'); ?>');"></div></div>
 		<?php the_clickthrough(get_the_title()); ?>
 	</a><!-- #post-<?php the_ID(); ?> -->
 	
@@ -965,7 +965,7 @@ function single_profile(){
 					<?php img_fecther($size='overlay_person', $limit=1); ?>
 					<div class="profile-content">
 						<header class="entry-header">
-							<h1 class="entry-title"><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'themename' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
+							<h1 class="entry-title"><?php the_title(); ?></h1>
 							<div class="entry-meta">
 								<?php
 									if(!in_array(get_post_type(), $post_types)):

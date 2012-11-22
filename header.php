@@ -79,7 +79,7 @@
 					<h1 id="site-title"><span><a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></span></h1>
 				</hgroup>
 	
-				<nav id="access" role="article">
+				<nav id="access" role="article" class="clearfix">
 					<div class="skip-link visuallyhidden"><a href="#content" title="<?php esc_attr_e( 'Skip to content', 'themename' ); ?>"><?php _e( 'Skip to content', 'themename' ); ?></a></div>
 					<?php wp_nav_menu( array( 'theme_location' => 'primary' ) ); ?>
 				</nav><!-- #access -->
