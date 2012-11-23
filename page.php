@@ -4,29 +4,30 @@
  * @subpackage themename
  */
 
-get_header(); ?>
-
-		<div id="primary">
-			<div id="content">
-
-				<?php the_post(); ?>
+get_header();
+			the_post(); ?>
+			<section id="intro">
+			<article role="article">
+				<div id="carousel"></div>
+				<div class="page-intro">
+					<?php
+						$parent = get_parent();
+						if($parent){?>
+							<h3 class="breadcrumb"><a href="<?php echo get_permalink($parent); ?>" rel="bookmark"><?php echo get_the_title($parent); ?></a></h3><?php
+						} 
+					?>
+					<h1 class="entry-title"><?php the_title(); ?></h1>
+				</div><!-- .intro -->
+			</article>
+			</section><!--#intro-->
+			<div id="content" class="centered">				
 
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> role="article">
-					<header class="entry-header">
-						<h1 class="entry-title"><?php the_title(); ?></h1>
-					</header><!-- .entry-header -->
 
 					<div class="entry-content">
 						<?php the_content(); ?>
-						<?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', 'themename' ), 'after' => '</div>' ) ); ?>
-						<?php edit_post_link( __( 'Edit', 'themename' ), '<span class="edit-link">', '</span>' ); ?>
 					</div><!-- .entry-content -->
 				</article><!-- #post-<?php the_ID(); ?> -->
-
-				<?php comments_template( '', true ); ?>
-
 			</div><!-- #content -->
-		</div><!-- #primary -->
 
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>

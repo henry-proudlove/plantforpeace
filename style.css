@@ -508,11 +508,11 @@ small{
 }
 
 small a{
-	color: #7d7b76;
+	color: #7d7b76 !important;
 }
 
 small a:hover{
-	color: #CD2029;
+	color: #CD2029 !important;
 }
 
 
@@ -582,6 +582,9 @@ small a:hover{
 h1, 
 h2, 
 h3,
+h4,
+h5,
+h6,
 time,
 #access a,
 .arrow-link,
@@ -591,6 +594,7 @@ time,
 .page-intro .entry-content .left, 
 .pg-intro .entry-content > p:first-child,
 .centered .text p:first-child,
+.page-template-default .entry-content  p:first-child,
 a.button,
 .cat-item
 {
@@ -612,6 +616,7 @@ time,
 
 .page-intro .entry-content > p,
 .page-intro .entry-content .left p,
+.page-template-default .entry-content  p:first-child,
 .centered .text p:first-child
 {
 	line-height: 1.12em;
@@ -626,7 +631,8 @@ h1{
 }
 
 h2,
-#chapters .entry-content .text p:first-child
+#chapters .entry-content .text p:first-child,
+.page-template-default .entry-content  p:first-child
 {
 	font-size: 2em;
 	color: #9e9c98;
@@ -1459,7 +1465,7 @@ h3.widget-title{
 	margin: 0;
 }
 
-#secondary ul, ol{
+#secondary ul, #secondry ol{
 	margin-left: 0;
 	border-bottom: 2px solid #f8f7f4;
 }
@@ -1838,6 +1844,10 @@ h3.widget-title{
 
 .resources .entry-title{
 	font-size: 1.5em;
+}
+
+.page-template-default ul, .page-template-default ol, .single ol, .single ul{
+	margin-bottom: 5px;
 }
 
 
