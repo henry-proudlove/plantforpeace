@@ -495,18 +495,20 @@ article.comment {
  *
  */
 #colophon {
-	padding: 9px 25px 10px;
-	background: #ece8e0;
+	/*padding: 9px 25px 10px;*/
+	padding: 9px 0 10px;
+	background: #24201F;
 	border-top: 3px solid #cb0022;
 }
 
 small{
 	font-family: arial, sans-serif;
 	font-size: .78em;
+	color: #7d7b76;
 }
 
 small a{
-	color: #473e3e;
+	color: #7d7b76;
 }
 
 small a:hover{
