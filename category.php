@@ -4,7 +4,7 @@
  * @subpackage themename
  */
 
-get_header(); ?>
+get_header();
 		the_post(); ?>
 		<section id="intro">
 			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> role="article">
