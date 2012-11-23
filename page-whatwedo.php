@@ -44,7 +44,7 @@ get_header();
 					endwhile;
 				?>
 				</div><!--#right-->
-			<section><!--#timeline-->
+			</section><!--#timeline-->
 		</div><!-- #content -->
 
 <?php get_footer(); ?>
