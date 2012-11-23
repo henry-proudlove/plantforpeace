@@ -1827,7 +1827,8 @@ h3.widget-title{
 }
 
 .breadcrumb a:hover, .page-intro a:hover{
-	color: #595751;	
+	color: #595751;
+	text-decoration: none;
 }
 
 .resources .arrow-link{
@@ -1889,6 +1890,10 @@ h3.widget-title{
 
 .wpcf7-mail-sent-ok{
 	background: #595751 !important;
+}
+
+.wp-post-image + .entry-content{
+	margin-top: 10px;
 }
 
 

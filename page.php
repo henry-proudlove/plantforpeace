@@ -23,7 +23,11 @@ get_header();
 			<div id="content" class="centered">				
 
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> role="article">
-
+					<?php
+						if(has_post_thumbnail()){
+							the_post_thumbnail('news_lead');
+						}	
+					?>
 					<div class="entry-content">
 						<?php the_content(); ?>
 					</div><!-- .entry-content -->
