@@ -57,7 +57,8 @@ $(document).ready(function() {
 		'innerWidth' : 920,
 		'innerHeight' : 528,
 		'iframe' : true,
-		'rel' : 'lightbox-video'
+		'rel' : 'lightbox-video',
+		'scrolling' : false
 	});
 	
 });

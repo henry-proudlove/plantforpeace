@@ -6,23 +6,6 @@
 ?>
 		<div id="secondary" class="widget-area">
 				
-				<aside id="image-gallery" class="widget thumb-gallery clearfix" role="complementary">
-					<h3 class="widget-title">Image Gallery</h3>
-					<?php thumbs_gallery('Image Gallery'); ?>
-				</aside><!--#image-gallery-->
-
-				<aside id="latest-videos" class="widget clearfix" role="complementary">
-					<h3 class="widget-title">Videos</h3>
-					<div id="thumbs">
-						<ul class="videos clearfix"></ul>
-					</div>
-				</aside><!--#latest-videos-->
-				
-				<aside id="brand-assets" class="widget thumb-gallery clearfix" role="complementary">
-					<h3 class="widget-title">Brand Assets</h3>
-					<?php thumbs_gallery('Brand Assets'); ?>
-				</aside><!--#brand-assets-->
-				
 				<aside id="categories" class="widget clearfix" role="complementary">
 					<h3 class="widget-title">Categories</h3>
 					<ul>
@@ -44,5 +27,17 @@
 				<?php get_archives('monthly','','option'); ?>
 				</select>
 				</form>
+				
+				<aside id="image-gallery" class="widget thumb-gallery clearfix" role="complementary">
+					<h3 class="widget-title">Image Gallery</h3>
+					<?php thumbs_gallery('Image Gallery'); ?>
+				</aside><!--#image-gallery-->
+
+				<aside id="latest-videos" class="widget clearfix" role="complementary">
+					<h3 class="widget-title">Videos</h3>
+					<div id="thumbs">
+						<ul class="videos clearfix"></ul>
+					</div>
+				</aside><!--#latest-videos-->
 
 		</div><!-- #secondary .widget-area -->

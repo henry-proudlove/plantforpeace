@@ -48,6 +48,6 @@
 	<nav id="nav-below" role="article">
 		<h1 class="section-heading visuallyhidden"><?php _e( 'Post navigation', 'themename' ); ?></h1>
 		<div class="nav-previous"><?php next_posts_link( __( 'Older posts', 'themename' ) ); ?></div>
-		<div class="nav-next button"><?php previous_posts_link( __( 'Newer posts', 'themename' ) ); ?></div>
+		<div class="nav-next"><?php previous_posts_link( __( 'Newer posts', 'themename' ) ); ?></div>
 	</nav><!-- #nav-below -->
 <?php endif; ?>

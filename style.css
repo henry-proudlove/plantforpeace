@@ -386,7 +386,6 @@ button {width: auto; overflow: visible;}
  */
 #content nav {
 	display: block;
-	overflow: hidden;
 }
 
 #content nav .nav-previous {
@@ -763,20 +762,18 @@ img{
 }
 
 #timeline #left .box-link{
-	background-image: url(images/timeline-marker-left.svg);
+	background-image: url(images/timeline-marker-left.png);
 	padding-right: 31px;
 	background-repeat: no-repeat;
-	background-position-x: right;
-	background-position-y: 47%;
+	background-position: right 47%;
 }
 
 #timeline #right .box-link{
-	background-image: url(images/timeline-marker-right.svg);
+	background-image: url(images/timeline-marker-right.png);
 	padding-left: 31px;
 	margin-left: -6px;
 	background-repeat: no-repeat;
-	background-position-x: left;
-	background-position-y: 47%;
+	background-position: left 47%;
 	position: relative;
 }
 
@@ -812,7 +809,7 @@ img{
 	-o-transition: all 0.3s ;
 }
 
-span.arrow-link, a.arrow-link {
+span.arrow-link, a.arrow-link, input.arrow-link {
 	transition: all 0.2s linear;
 	-webkit-transition: all 0.2s linear;
 	-moz-transition: all 0.2s linear;
@@ -835,7 +832,7 @@ span.arrow-link, a.arrow-link {
 	color: #CD2029;
 }
 
-.box-link:hover .arrow-link, a.arrow-link:hover{
+.box-link:hover .arrow-link, a.arrow-link:hover, input.arrow-link:hover{
 	color: #940a1a;
 	background-position: 3px center; 
 }
@@ -912,11 +909,11 @@ span.arrow-link, a.arrow-link {
 }
 
 .nav-next a{
-	background: #fcfbfa url('images/arrow-link-grey.svg') no-repeat left center;
+	background: #fcfbfa url('images/arrow-link-grey.png') no-repeat left center;
 }
 
 .nav-previous a{
-	background: #fcfbfa url('images/arrow-link-grey-back.svg') no-repeat left center;
+	background: #fcfbfa url('images/arrow-link-grey-back.png') no-repeat left center;
 }*/
 
 #promos > .box-link{
@@ -1114,7 +1111,7 @@ section#intro{
  */
 
 .arrow-link{
-	background: url('images/arrow-link.svg') no-repeat left center;
+	background: url('images/arrow-link.png') no-repeat left center;
 	padding: 0 0 0 15px;
 }
 
@@ -1147,7 +1144,7 @@ h3.breadcrumb a{
 }
 
 #branding-holder{
-	background: url('images/header-bg.svg') no-repeat top center;
+	background: url('images/header-bg.png') no-repeat top center;
 	position: absolute;
 	width: 960px;
 	z-index: 50;
@@ -1169,7 +1166,7 @@ h3.breadcrumb a{
 }
 
 #get-involved-nav{
-	background: url('images/get-involved-circ.svg') no-repeat bottom left;
+	background: url('images/get-involved-circ.png') no-repeat bottom left;
 	display: block;
 	float: right;
 	width: 98px;
@@ -1289,13 +1286,13 @@ a.button, .nav-previous a, .nav-next a{
 }
 
 .nav-previous a{
-	background-image: url('images/arrow-link-grey-back.svg');
+	background-image: url('images/arrow-link-grey-back.png');
 	background-position: 15px 11px;
 	padding-left: 35px;
 }
 
 .nav-next a{
-	background-image: url('images/arrow-link-grey.svg');
+	background-image: url('images/arrow-link-grey.png');
 	background-position: 118px 11px;
 	padding-right: 35px;
 }
@@ -1306,26 +1303,50 @@ a.button, .nav-previous a, .nav-next a{
 	color: white;
 }
 
+.button.red:hover{
+	background: #ba1e25;
+}
+
 .button.facebook{
-	background-image: url('images/ico-fb.svg');
+	background-image: url('images/ico-fb.png');
 	background-position: 19px 8px;
 	padding-left: 55px;
 	background-color: #4c70a9;
 	color: white;
 }
 
+.button.facebook:hover{
+	background-color: #446496;
+}
+
 .button.twitter{
-	background-image: url('images/ico-tw.svg');
+	background-image: url('images/ico-tw.png');
 	background-position: 15px 11px;
 	padding-left: 55px;
 	background-color: #24aae1;
 	color: white;
 }
 
+.button.twitter:hover{
+	background-color: #219cd1;
+}
+
 .button.newsletter{
-	background-image: url('images/ico-mail.svg');
+	background-image: url('images/ico-mail.png');
 	background-position: 14px 12px;
 	padding-left: 55px;
+}
+
+.button:hover, .nav-next a:hover, .nav-previous a:hover{
+	background-color: #f5f3ee;
+}
+
+.nav-previous a:hover{
+	background-position: 18px 11px;
+}
+
+.nav-next a:hover{
+	background-position: 115px 11px;
 }
 
 section#get-involved #products header{
@@ -1702,7 +1723,7 @@ h3.widget-title{
 .single .nav-next a,
 .galleria-image-nav-right
 {
-	background-image: url('images/overlay-nav-right.svg');
+	background-image: url('images/overlay-nav-right.png');
 	left: auto;
 }
 
@@ -1718,7 +1739,7 @@ h3.widget-title{
 .single .nav-previous a,
 .galleria-image-nav-left
 {
-	background-image: url('images/overlay-nav-left.svg');
+	background-image: url('images/overlay-nav-left.png');
 	right: auto;
 }
 
@@ -1734,7 +1755,7 @@ h3.widget-title{
 	left: -45px;
 }
 
-#cboxPrevious, #cboxClose, #cboxNext{
+#cboxPrevious, #cboxClose, #cboxNext, .single .nav-previous, .single .nav-next{
 	opacity: 0.6;
 	filter:Alpha(opacity=60);
 	-webkit-transition: all 0.2s ;
@@ -1745,7 +1766,7 @@ h3.widget-title{
 	
 }
 
-#cboxPrevious:hover, #cboxClose:hover, #cboxNext:hover{
+#cboxPrevious:hover, #cboxClose:hover, #cboxNext:hover, .single .nav-previous:hover, .single .nav-next:hover{
 	opacity: 1;
 	filter:Alpha(opacity=100);
 } 
@@ -1759,7 +1780,7 @@ h3.widget-title{
 }
 
 #cboxClose{
-	background-image: url('images/overlay-close.svg');
+	background-image: url('images/overlay-close.png');
 	width: 30px;
 	height: 30px;
 	background-repeat: no-repeat;
@@ -1848,6 +1869,26 @@ h3.widget-title{
 
 .page-template-default ul, .page-template-default ol, .single ol, .single ul{
 	margin-bottom: 5px;
+}
+
+.wpcf7-response-output, .wpcf7-not-valid-tip{
+	font-family: 'Trade Gothic', arial, sans-serif;
+	text-transform: uppercase;
+	font-size: 0.9em;
+	line-height: 1.2em;
+	border: none !important;
+	background: #CD2029 !important;
+	color: white;
+	padding: 0.5em 1em !important;
+	margin: 0 !important;
+}
+
+.wpcf7-not-valid-tip{
+	width: 190px !important;
+}
+
+.wpcf7-mail-sent-ok{
+	background: #595751 !important;
 }
 
 
