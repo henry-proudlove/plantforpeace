@@ -12,8 +12,6 @@ get_header();
 		pg_header(); ?>
 
 		<div id="content">
-			<div class="intro">
-			</div><!-- .intro -->
 			<section id="get-involved" class="clearfix">
 				<section id="donate" class="clearfix">
 					<h2>Donate</h2>

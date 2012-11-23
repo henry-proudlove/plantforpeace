@@ -280,67 +280,63 @@ add_filter('get_the_date', 'p4p_post_date');
 				array(
 					'page_title' => 'Home',
 					'page_template' => 'page-home.php',
-					'menu_order' => 0
+					'menu_order' => 0,
 				),
 				array(
 					'page_title' => 'What We Do',
 					'page_template' => 'page-whatwedo.php',
-					'menu_order' => 1
+					'menu_order' => 1,
 				),
 				array(
 					'page_title' => 'How we Work',
 					'page_template' => 'page-howwework.php',
-					'menu_order' => 2
+					'menu_order' => 2,
 				),
 				array(
 					'page_title' => 'Plant For Peace Foundation',
 					'page_template' => 'page-body.php',
-					'menu_order' => 3
+					'menu_order' => 3,
+					
 				),
 				array(
 					'page_title' => 'International Steering Group',
 					'page_template' => 'page-body.php',
-					'menu_order' => 4
+					'menu_order' => 4,
 				),
 				array(
 					'page_title' => 'Funktional Group',
 					'page_template' => 'page-body.php',
-					'menu_order' => 5
+					'menu_order' => 5,
 				),
 				array(
 					'page_title' => 'Where we Work',
 					'page_template' => 'page-wherewework.php',
-					'menu_order' => 6				
+					'menu_order' => 6,
 				),
 				array(
 					'page_title' => 'Supporters',
 					'page_template' => 'page-supporters.php',
-					'menu_order' => 7
+					'menu_order' => 7,
 				),
 				array(
 					'page_title' => 'News',
 					'page_template' => 'page-news.php',
-					'menu_order' => 8
+					'menu_order' => 8,
 				),
 				array(
 					'page_title' => 'Products',
 					'page_template' => 'page-product.php',
-					'menu_order' => 8
+					'menu_order' => 9,
 				),
 				array(
 					'page_title' => 'Get Involved',
 					'page_template' => 'page-getinvolved.php',
-					'menu_order' => 10
+					'menu_order' => 10,
 				),
 				array(
 					'page_title' => 'Image Gallery',
 					'page_template' => 'page-gallery.php',
-					'menu_order' => 10
-				),
-				array(
-					'page_title' => 'Brand Assets',
-					'page_template' => 'page-gallery.php',
-					'menu_order' => 10
+					'menu_order' => 11,
 				)
 		);
 	$page_count = count($pforp_pages);
@@ -348,6 +344,7 @@ add_filter('get_the_date', 'p4p_post_date');
 	foreach($pforp_pages as $page)
 	{
 		$new_page = array(
+			'ID' => $page['page_id'],
 			'post_type' => 'page',
 			'post_title' => $page['page_title'],
 			'post_content' => '',
@@ -359,16 +356,29 @@ add_filter('get_the_date', 'p4p_post_date');
 		$new_page_id = wp_insert_post($new_page);
 		update_post_meta($new_page_id, '_wp_page_template', $page['page_template']);
 		
-		
-		if($page['page_template'] == 'page-home.php')
-		{
-			update_option( 'page_on_front', $new_page_id );
-			update_option( 'show_on_front', 'page' );
-		}
-		
-		if($page['page_template'] == 'page-news.php')
-		{
-			update_option( 'page_for_posts', $new_page_id );
+		switch ($page['page_title']){
+			case 'Home':
+				update_option( 'page_on_front', $new_page_id );
+				update_option( 'show_on_front', 'page' );
+				break;
+			case 'News':
+				update_option( 'page_for_posts', $new_page_id );
+				break;
+			case 'Plant For Peace Foundation':
+				add_post_meta($new_page_id, '_page_id', 'p4p', true);
+				break;
+			case 'International Steering Group':
+				add_post_meta($new_page_id, '_page_id', 'isg', true);
+				break;
+			case 'Funktional Group':
+				add_post_meta($new_page_id, '_page_id', 'fgi', true);
+				break;
+			case 'Where we Work':
+				add_post_meta($new_page_id, '_page_id', 'wherework', true);
+				break;
+			case 'Products':
+				add_post_meta($new_page_id, '_page_id', 'product', true);
+				break;
 		}
 	}
 }
@@ -387,8 +397,16 @@ add_filter('get_the_date', 'p4p_post_date');
 		
 		'p4pf_profile' => array(
 			'name' => 'p4p_profile',
-			'label' => 'P4P People',
-			'sing' => 'P4P Person' ,
+			'label' => 'P4P UK People',
+			'sing' => 'P4P UK Person' ,
+			'edit' => 'Person',
+			'edits' => 'People',
+			'supports' => array( 'title', 'editor', 'thumbnail')
+		),
+		'p4pf_afg_profile' => array(
+			'name' => 'p4pf_afg_profile',
+			'label' => 'P4P Afganistan People',
+			'sing' => 'P4P Afganistan Person' ,
 			'edit' => 'Person',
 			'edits' => 'People',
 			'supports' => array( 'title', 'editor', 'thumbnail')
@@ -480,8 +498,17 @@ add_filter('get_the_date', 'p4p_post_date');
 		
 		'p4p_secs' => array(
 			'name' => 'p4p_secs',
-			'label' => 'P4P Sections',
-			'sing' => 'P4P Section',
+			'label' => 'P4P UK Sections',
+			'sing' => 'P4P UK Section',
+			'edit' => 'Section',
+			'edits' => 'Sections',
+			'supports' => array( 'title', 'editor', 'thumbnail')
+		),
+		
+		'p4p_afg_secs' => array(
+			'name' => 'p4p_afg_secs',
+			'label' => 'P4P Afghansitan Sections',
+			'sing' => 'P4P Afghansitan Section',
 			'edit' => 'Section',
 			'edits' => 'Sections',
 			'supports' => array( 'title', 'editor', 'thumbnail')
@@ -509,6 +536,15 @@ add_filter('get_the_date', 'p4p_post_date');
 			'name' => 'wherework_secs',
 			'label' => 'Afganistan Sections',
 			'sing' => 'Afganistan Section',
+			'edit' => 'Section',
+			'edits' => 'Sections',
+			'supports' => array( 'title', 'editor', 'thumbnail')
+		),
+		
+		'product_secs' => array(
+			'name' => 'product_secs',
+			'label' => 'Products Sections',
+			'sing' => 'Product Section',
 			'edit' => 'Section',
 			'edits' => 'Sections',
 			'supports' => array( 'title', 'editor', 'thumbnail')
@@ -823,18 +859,30 @@ function the_timeline_exceprt(){
 function pagefinder(){
 
 	global $post;
-	$pg_title = get_the_title();
+	/*$pg_title = get_the_title();
+	echo get_page_template() . '</br>';
+	echo get_template_directory();*/
+	
+	$pg_id = get_post_meta(get_the_ID(), '_page_id', true);
 
-	switch($pg_title){
-		case 'Plant For Peace Foundation':
+	switch($pg_id){
+		case 'p4p':
 			$type = 'p4p';
 			break;
-		case 'International Steering Group':
+		case 'isg':
 			$type = 'isg';
 			break;
-		case 'Funktional Group':
+		case 'fgi':
 			$type = 'fgi';
 			break;
+		case 'wherework':
+			$type = 'wherework';
+			break;
+		case 'product':
+			$type = 'product';
+			break;
+		default :
+			$type = '';
 	}
 	
 	return $type;
@@ -873,23 +921,20 @@ function profile_markup($class){
 	
 <?php }
 
-function page_sections($where = false){
+function page_sections(){
 	
-	if($where == true){
-		$type = 'wherework_secs';
-	}else{
-		$type = pagefinder() . '_secs';
-	}
+	$type = pagefinder() . '_secs';
 		
-	echo '<section id="chapters" class="centered clearfix">';
 	$args = array('post_type' => $type, 'posts_per_page' => '-1');
 		$wp_query = new WP_Query($args);
-		
+	if($wp_query->have_posts()):
+	
+		echo '<section id="chapters" class="centered clearfix">';
 		while ( $wp_query->have_posts() ) : $wp_query->the_post();
 				section_markup();
 		endwhile;
 	echo '</section><!--#chapters-->';
-	
+	endif;
 	wp_reset_query();
 	
 }

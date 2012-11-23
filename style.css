@@ -602,7 +602,7 @@ time,
 	line-height: 1em;
 }
 
-.entry-content > p,
+.page-intro .entry-content > p,
 .page-intro .entry-content .left p,
 .centered .text p:first-child
 {
@@ -1051,6 +1051,10 @@ section#intro{
 {
 	width: 576px;
 	float: left;
+}
+
+#chapters + #contact-retailers{
+	border-top: 2px solid #FAFAF8;
 }
 
 .page-template-page-product-php .contact-form{
@@ -1751,11 +1755,6 @@ h3.widget-title{
 .page-template-page-gallery-php #content{
 	padding: 25px 0;
 }
-
-.single .entry-content a:hover{
-	text-decoration: underline;
-}
-
 #cboxMiddleRight, #cboxMiddleLeft{
 	width: 80px;
 }
@@ -1764,6 +1763,11 @@ h3.widget-title{
 	width: 50px;
 	height: 50px;
 }
+
+.entry-content a:hover{
+	text-decoration: underline;
+}
+
 
 
 

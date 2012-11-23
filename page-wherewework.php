@@ -12,7 +12,7 @@ get_header();
 		pg_header(); ?>
 
 		<div id="content">
-			<?php page_sections(true); ?>
+			<?php page_sections(); ?>
 		</div><!-- #content -->
 
 <?php get_footer(); ?>
