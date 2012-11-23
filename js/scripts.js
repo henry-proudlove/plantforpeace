@@ -53,6 +53,13 @@ $(document).ready(function() {
 		}
 	});
 	
+	$('a.lightbox-video').colorbox({
+		'innerWidth' : 920,
+		'innerHeight' : 528,
+		'iframe' : true,
+		'rel' : 'lightbox-video'
+	});
+	
 });
 
 function setupGallery(videos) {

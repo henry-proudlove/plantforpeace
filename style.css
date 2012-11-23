@@ -509,6 +509,12 @@ small a{
 	color: #473e3e;
 }
 
+small a:hover{
+	color: #CD2029;
+}
+
+
+
 #foot-email, #foot-info{
 	width: 50%;
 	display: block;
@@ -1336,6 +1342,25 @@ section#get-involved .contact-form form input[type='text']{
 
 /*
  *
+ * PLANT FOR PEACE PAGE
+ *
+ */
+ 
+#foundation-af{
+		border-top: 2px solid #FAFAF8;
+}
+
+#foundation-uk{
+		margin-bottom: 20px;
+}
+
+.foundation-links{
+	margin: -9px 0 15px;
+}
+
+
+/*
+ *
  * NEWS SECTION
  *
  */
@@ -1369,16 +1394,16 @@ section#get-involved .contact-form form input[type='text']{
 	padding-bottom: 30px;
 }
 
-#primary h1, #primary h2, #primary h3, .single h1{
+#primary h1, #primary h2, #primary h3, .single h1, .resources h1{
 	margin: 0;
 	padding: 0;
 }
 
-#primary time, .single time{
+#primary time, .single time, .resources time {
 	margin-bottom: 2px;
 }
 
-#primary .entry-title, .single h1{
+#primary .entry-title, .single h1, .resources h1{
 	margin-bottom: 7px;
 }
 
@@ -1512,15 +1537,15 @@ h3.widget-title{
 	width: 270px;
 }
 
-#primary h1 a{
+#primary h1 a, .resources h1 a{
 	color: #595751;
 }
 
-.single .centered article{
+.single .centered article, .resources .centered article{
 	margin-top: 30px;
 }
 
-.single .entry-content p{
+.single .entry-content p, .resources .entry-content p {
 	line-height: 1.3em;
 }
 
@@ -1534,7 +1559,7 @@ h3.widget-title{
 	text-indent: -9000px;
 }
 
-#primary h1 a:hover{
+#primary h1 a:hover, .resources h1 a:hover{
 	color: #CD2029;
 }
 
@@ -1554,7 +1579,7 @@ h3.widget-title{
 #cboxMiddleLeft, #cboxBottomLeft{clear:left;}
 #cboxContent{position:relative; overflow:hidden;}
 #cboxLoadedContent{overflow:auto;}
-#cboxLoadedContent iframe{display:block; border:0;}
+#cboxLoadedContent > iframe{width:100%; height:100%; border:0;}
 #cboxTitle{margin:0;}
 #cboxLoadingOverlay, #cboxLoadingGraphic{position:absolute; top:0; left:0; width:100%;}
 #cboxPrevious, #cboxNext, #cboxClose, #cboxSlideshow{cursor:pointer;}
@@ -1767,6 +1792,53 @@ h3.widget-title{
 .entry-content a:hover{
 	text-decoration: underline;
 }
+
+.page-intro a{
+	color: #cc353c;
+}
+
+.breadcrumb a:hover, .page-intro a:hover{
+	color: #595751;	
+}
+
+.resources .arrow-link{
+	margin: 0;
+}
+
+.resources .entry-title{
+	font-size: 2em;
+	margin: 0;
+}
+
+.resources article img{
+	float:left;
+	margin-right: 25px;
+}
+
+.resources article img + .holder{
+	float: left;
+	width: 530px;
+}
+
+.resources.centered{
+	width: 690px;
+}
+
+.resources article{
+	margin: 0;
+	padding: 20px 0;
+	border-bottom: 2px solid #f8f7f4;
+}
+
+#content.resources{
+	padding-top: 40px;
+}
+
+.resources .entry-title{
+	font-size: 1.5em;
+}
+
+
 
 
 

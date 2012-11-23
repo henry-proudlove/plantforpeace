@@ -337,6 +337,21 @@ add_filter('get_the_date', 'p4p_post_date');
 					'page_title' => 'Image Gallery',
 					'page_template' => 'page-gallery.php',
 					'menu_order' => 11,
+				),
+				array(
+					'page_title' => 'Press Releases',
+					'page_template' => 'page-press-releases.php',
+					'menu_order' => 11,
+				),
+				array(
+					'page_title' => 'Resources',
+					'page_template' => 'page-resources.php',
+					'menu_order' => 11,
+				),
+				array(
+					'page_title' => 'Contact Us',
+					'page_template' => 'page-contact.php',
+					'menu_order' => 11,
 				)
 		);
 	$page_count = count($pforp_pages);
@@ -404,7 +419,7 @@ add_filter('get_the_date', 'p4p_post_date');
 			'supports' => array( 'title', 'editor', 'thumbnail')
 		),
 		'p4pf_afg_profile' => array(
-			'name' => 'p4pf_afg_profile',
+			'name' => 'p4p_afg_profile',
 			'label' => 'P4P Afganistan People',
 			'sing' => 'P4P Afganistan Person' ,
 			'edit' => 'Person',
@@ -483,7 +498,7 @@ add_filter('get_the_date', 'p4p_post_date');
 			'supports' => array('title', 'thumbnail')
 		),
 		
-		//Press releases
+		//Press releases resources
        
        'press_rels' => array(
 			'name' => 'press_rels',
@@ -491,7 +506,16 @@ add_filter('get_the_date', 'p4p_post_date');
 			'sing' => 'Press Release',
 			'edit' => 'Press Release',
 			'edits' => 'Press Releases',
-			'supports' => array('title', 'editor')
+			'supports' => array('title', 'editor', 'thumbnail')
+		),
+		
+		'resources' => array(
+			'name' => 'resources',
+			'label' => 'Resources',
+			'sing' => 'Resource',
+			'edit' => 'Resource',
+			'edits' => 'Resources',
+			'supports' => array('title', 'editor', 'thumbnail')
 		),
 		
 		// P4PF, ISG, FGI Page Sections
@@ -674,6 +698,7 @@ add_image_size( 'overlay_person', 430, 350, true );
 add_image_size( 'news_lead', 590, 300, true );
 add_image_size( 'news_body', 295, 295, true );
 add_image_size( 'timeline', 430, 200, true );
+add_image_size( 'resource', 135, 135, true );
 
 
 update_option('medium_size_w', 590);
@@ -756,11 +781,38 @@ function carousel_meta(){
 	$meta = $carousel_meta->the_meta();
 	
 	if($meta['page-video'] == 'video'){
-		$meta['page-video'] = 'colorBox';
+		$meta['page-video'] = 'lightbox-video';
+		$meta['ct_link'] = video_fectcher($meta['ct_link']);
 	}else{
 		$meta['page-video'] = '';
 	}
+	
 	return $meta;
+}
+
+function video_fectcher($video){
+
+		if(strpos($video , 'vimeo.com')){	
+		
+			$video = substr($video , 17);
+			$video = 'http://player.vimeo.com/video/' . $video . '?autoplay=1';
+			return $video;
+
+		}elseif (strpos($video, 'youtu.be')){	
+		
+			$video = substr($video , 16, 11);
+			$video = 'http://www.youtube.com/embed/' . $video . '?autoplay=1&amp;wmode=transparent';
+			return $video;
+			
+		}elseif (strpos($video_link , 'youtube.com')){
+		
+			$video = substr($video , 31 , 11);
+			$video = 'http://www.youtube.com/embed/' . $video . '?autoplay=1';
+			return $video;
+			
+		}else{
+			return false;
+		}
 }
 
 function the_clickthrough($text = 'Find out more'){
@@ -808,9 +860,9 @@ function pg_header(){
 			echo '<div id="carousel"><div id="header-images">';
 			
 			if(is_page_template('page-whatwedo.php')){?>
-				<a href="#" class="video" rel="bookmark"><?php img_fecther('header' , 1) ?></a> <?php
+				<a href="http://player.vimeo.com/video/53156464?badge=0" class="lightbox-video" rel="bookmark"><?php img_fecther('header' , 1) ?></a> <?php
 			}else if(is_page_template('page-gallery.php')){
-			}else if(is_page_template('page-gallery.php')){
+			
 			}else{
 				img_fecther('header' , -1);
 			}
@@ -894,19 +946,20 @@ function people_profiles(){
 	
 	echo '<section id="people" class="profiles">';
 	echo '<h3>People</h3>';
-	
-		$args = array('post_type' => $type, 'posts_per_page' => '-1');
-		$wp_query = new WP_Query($args);
-		$i=1;
-		while ( $wp_query->have_posts() ) : $wp_query->the_post();
-				$class = rowpos_class($i , 5, $wp_query->post_count);
-				profile_markup($class);
-				$i++;
-		endwhile;
+		profiles_loop($type);
 	echo '</section><!--#people-->';
-	
+}
+
+function profiles_loop($type){
+	$args = array('post_type' => $type, 'posts_per_page' => '-1');
+	$wp_query = new WP_Query($args);
+	$i=1;
+	while ( $wp_query->have_posts() ) : $wp_query->the_post();
+		$class = rowpos_class($i , 5, $wp_query->post_count);
+		profile_markup($class);
+		$i++;
+	endwhile;
 	wp_reset_query();
-	
 }
 
 
@@ -924,7 +977,11 @@ function profile_markup($class){
 function page_sections(){
 	
 	$type = pagefinder() . '_secs';
-		
+	sections_loop($type);
+	
+}
+
+function sections_loop($type){
 	$args = array('post_type' => $type, 'posts_per_page' => '-1');
 		$wp_query = new WP_Query($args);
 	if($wp_query->have_posts()):
@@ -936,7 +993,6 @@ function page_sections(){
 	echo '</section><!--#chapters-->';
 	endif;
 	wp_reset_query();
-	
 }
 
 function section_markup(){
@@ -951,42 +1007,46 @@ function section_markup(){
 	</article><!--#post-<?php the_ID(); ?>-->
 <?php }
 
-function get_press_releases(){
-	$args = array('post_type' => 'press_rels', 'posts_per_page' => '-1');
+function get_resources($type){
+	$args = array('post_type' => $type, 'posts_per_page' => '-1');
 	$wp_query = new WP_Query($args);
-	echo '<ul id="press-rels">';
 	while ( $wp_query->have_posts() ) : $wp_query->the_post(); 
 	
 		$meta = get_post_meta(get_the_ID(), '_link_meta', true);?>
 		
-		<li id="post-<?php the_ID(); ?>" <?php post_class(); ?> role="article">
-			<header class="entry-header">
-				<div class="entry-meta">
-					<?php
-						printf( __( '<time class="entry-date" datetime="%2$s" pubdate>%3$s</time>', 'themename' ),
-							get_permalink(),
-							get_the_date( 'c' ),
-							get_the_date()
-						);
-					?>
-				</div><!-- .entry-meta -->
+		<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?> role="article">
+			<?php 
+				if (has_post_thumbnail()):
+					the_post_thumbnail('resource');
+				endif; ?>
+			<div class="holder">
+				<header class="entry-header">
+				<? if (get_post_type() == 'press_rels'): ?>
+					<div class="entry-meta">
+						<?php
+							printf( __( '<time class="entry-date" datetime="%2$s" pubdate>%3$s</time>', 'themename' ),
+								get_permalink(),
+								get_the_date( 'c' ),
+								get_the_date()
+							);
+						?>
+					</div><!-- .entry-meta -->
+				<?php endif; ?>
 				
-				<h1 class="entry-title"><?php the_title(); ?></h1>
+				<h1 class="entry-title"><a href="<?php echo $meta['link_url']; ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'themename' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
 				
-			</header><!-- .entry-header -->
+				</header><!-- .entry-header -->
 
-			<div class="entry-summary">
-				<?php the_excerpt(); ?>
-			</div><!-- .entry-summary -->
-			
-			<a href="<?php echo $meta['link_url']; ?>" class="arrow-link" title="<?php printf( esc_attr__( 'Permalink to %s', 'themename' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php echo $meta['link_txt']; ?></a>
-			
-		</li><!-- #post-<?php the_ID(); ?> --><?php
+				<div class="entry-summary">
+					<?php the_content(); ?>
+				</div><!-- .entry-summary -->
+				
+				<a href="<?php echo $meta['link_url']; ?>" class="arrow-link" title="<?php printf( esc_attr__( 'Permalink to %s', 'themename' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php echo $meta['link_txt']; ?></a>
+			</div><!--.holder-->
+		</article><!-- #post-<?php the_ID(); ?> --><?php
 			
 	endwhile;
-	
-	echo '</ul><!--#press-rels-->';
-	
+		
 	wp_reset_query();
 }
 

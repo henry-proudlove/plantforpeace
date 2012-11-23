@@ -5,11 +5,6 @@
  */
 ?>
 		<div id="secondary" class="widget-area">
-		
-				<aside id="press-releases" class="widget clearfix" role="complementary">
-					<h3 class="widget-title">Press Releases</h3>
-					<?php get_press_releases(); ?>
-				</aside><!--#press-releases-->
 				
 				<aside id="image-gallery" class="widget thumb-gallery clearfix" role="complementary">
 					<h3 class="widget-title">Image Gallery</h3>

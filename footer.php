@@ -9,7 +9,9 @@
 
 	<footer id="colophon" role="contentinfo">
 			<div id="site-generator" class="clearfix">
-				<small id="foot-email"><a href="mailto:info@plantforpeace.org">info@plantforpeace.org</a></small>
+				<small id="foot-email">
+					<a href="#">Contact Us</a> | <a href="#">Press Releases</a> | <a href="#">Resources</a> 
+				</small>
 				<small id="foot-info">© 2012 Plant for Peace Foundation Registered Chairty 202918</small>
 			</div>
 	</footer><!-- #colophon -->
